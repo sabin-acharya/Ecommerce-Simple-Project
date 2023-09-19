@@ -1,0 +1,55 @@
+﻿@model Shopping.ViewModel.CategoryVM
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="container p-3">
+    <form asp-controller="Category" asp-action="CreateUpdate" method="post">
+        <div class="border p-3 mt-4">
+            <div class="row pb-2">
+                <h2 class="text-primary">
+                    @if (Model.Category == null || Model.Category.Id == 0)
+                    {
+                        <span>Create Category</span>
+                    }
+                    else
+                    {
+                        <span>Update Category</span>
+                    }
+                </h2>
+            </div>
+            <div asp-validation-summary="All"></div>
+
+            <div class="form-group">
+                <label asp-for="Category.Name" class="control-label">Category Name</label>
+                <input asp-for="Category.Name" class="form-control" />
+                <span asp-validation-for="Category.Name" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Category.DisplayOrder" class="control-label">Display Order</label>
+                <input asp-for="Category.DisplayOrder" class="form-control" />
+                <span asp-validation-for="Category.DisplayOrder" class="text-danger"></span>
+            </div>
+
+            <div class="text-center">
+                @if (Model.Category == null || Model.Category.Id == 0)
+                {
+                    <button type="submit" class="btn btn-primary" style="width:150px">Create</button>
+                }
+                else
+                {
+                    <button type="submit" class="btn btn-primary" style="width:150px">Update</button>
+                }
+
+                <a asp-controller="Category" asp-action="Index" class="btn btn-secondary" style="width:150px">Back to List</a>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}

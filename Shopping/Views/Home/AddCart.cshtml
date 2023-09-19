@@ -1,0 +1,88 @@
+﻿@model Shopping.ViewModel.CartViewModel
+
+@{
+    ViewData["Title"] = "AddCart";
+}
+
+<div class="container">
+    <h1 class="mt-5">Add to Cart</h1>
+
+    <div class="card mt-4">
+        <div class="card-header">
+            <h2>Product Details</h2>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <dl class="row">
+                        <dt class="col-sm-4">Product Name:</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.CartItem.Product.Name)</dd>
+
+                        <dt class="col-sm-4">Description:</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.CartItem.Product.Description)</dd>
+
+                        <dt class="col-sm-4">Total Price:</dt>
+                        <dd class="col-sm-8">
+                            
+                            @if (Model != null)
+                            {
+                                var totalPrice = Model.CartItem.Product.Price * Model.CartItem.Quantity;
+                                
+                                @Html.DisplayFor(model => totalPrice) 
+                            }
+                        </dd>
+
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.CartItem.Product.ImageUrl)
+                        </dt>
+                        <dd class="col-sm-10">
+                            <div class="image-container">
+                                <img src="@Model.CartItem.Product.ImageUrl" alt="@Model.CartItem.Product.Name" class="img-thumbnail" />
+                            </div>
+                        </dd>
+
+                    </dl>
+                </div>
+            </div>
+
+            <form asp-action="AddCart" asp-controller="Home" method="post">
+                <input type="hidden" asp-for="CartItem.Id" />
+                <button type="submit" class="btn btn-primary">Add to Cart</button>
+            </form>
+
+            <a asp-action="Index" class="btn btn-secondary">Back to Product List</a>
+        </div>
+    </div>
+</div>
+<style>
+    .image-container {
+        border: 2px solid #333; 
+        padding: 10px; 
+        text-align: center; 
+    }
+
+        .image-container img {
+            max-width: 100%; 
+            height: auto; 
+        }
+</style>
+<script>
+    // Function to calculate total price
+    function calculateTotalPrice() {
+        var productPrice = parseFloat(document.getElementById("productPrice").value);
+        var quantity = parseInt(document.getElementById("quantity").value);
+
+        if (!isNaN(productPrice) && !isNaN(quantity)) {
+            var totalPrice = productPrice * quantity;
+            document.getElementById("totalPrice").value = totalPrice.toFixed(2); // Display total price with two decimal places
+        } else {
+            document.getElementById("totalPrice").value = ""; // Clear total price if inputs are not valid
+        }
+    }
+
+    // Add an event listener to trigger the calculation when the quantity changes
+    document.getElementById("quantity").addEventListener("input", calculateTotalPrice);
+
+    // Initial calculation when the page loads
+    calculateTotalPrice();
+</script>

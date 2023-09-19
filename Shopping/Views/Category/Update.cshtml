@@ -1,0 +1,35 @@
+﻿@model Shopping.ViewModel.CategoryVM
+
+
+<form method="post" asp-action="CreateUpdate">
+	<div class="border p-3 mt-4">
+		<div class="row pb-2">
+			<div class="row pb-2">
+				<h2 class="text-primary">Update Category</h2>
+
+			</div>
+			<div class="mb-3">
+				<label asp-for="Category.Name"></label>
+				<input asp-for="Category.Name" class="form-control" />
+				<span asp-validation-for="Category.Name" class="text-danger"></span>
+			</div>
+			<div class="mb-3">
+				<label asp-for="Category.DisplayOrder"></label>
+				<input asp-for="Category.DisplayOrder" class="form-control" />
+				<span asp-validation-for="Category.DisplayOrder" class="text-danger"></span>
+			</div>
+			<div>
+				<button type="submit" style="background-color: slategrey; color: #FFFFFF;">
+					Update
+				</button>
+
+				<a asp-controller="Category" asp-action="Index" class="btn btn-secondary" style="width:150px">
+					Back to List
+				</a>
+			</div>
+
+
+		</div>
+
+	</div>
+</form>

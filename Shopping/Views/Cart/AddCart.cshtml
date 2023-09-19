@@ -1,0 +1,80 @@
+﻿@model Shopping.ViewModel.CartViewModel
+
+@{
+    ViewData["Title"] = "AddCart";
+}
+
+<h1>Add to Cart</h1>
+
+<div>
+    <h2>Product Details</h2>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CartItem.Product.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CartItem.Product.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CartItem.Product.Description)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CartItem.Product.Description)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CartItem.Product.Price)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CartItem.Product.Price)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CartItem.Product.ImageUrl)
+        </dt>
+        <dd class="col-sm-10">
+            <img src="@Model.CartItem.Product.ImageUrl" alt="@Model.CartItem.Product.Name" class="img-thumbnail" />
+        </dd>
+    </dl>
+
+    <form asp-action="AddCart" asp-controller="Cart" method="post">
+        <input type="hidden" asp-for="CartItem.Id" />
+
+        <div class="form-group">
+            <label for="quantity">Quantity:</label>
+            <input type="number" id="quantity" name="quantity" class="form-control" value="1" min="1" />
+        </div>
+
+        <div class="form-group">
+            <label for="totalPrice">Total Price:</label>
+            <input type="text" id="totalPrice" name="totalPrice" class="form-control" readonly />
+        </div>
+
+        <!-- Move the "Buy" button outside of the loop -->
+        <button type="submit" class="btn btn-primary">Add to Cart</button>
+    </form>
+
+    <a asp-action="Index" class="btn btn-secondary">Back to Product List</a>
+</div>
+
+<script>
+    // JavaScript code for calculating total price
+    $(document).ready(function () {
+        var quantityInput = $("#quantity");
+        var totalPriceInput = $("#totalPrice");
+        var productPrice = @Model.CartItem.Product.Price;
+
+        // Function to calculate total price
+        function calculateTotalPrice() {
+            var quantity = parseInt(quantityInput.val());
+            var total = quantity * productPrice;
+            totalPriceInput.val(total.toFixed(2)); // Format to two decimal places
+        }
+
+        // Calculate the initial total price
+        calculateTotalPrice();
+
+        // Update the total price whenever the quantity changes
+        quantityInput.on("input", calculateTotalPrice);
+    });
+</script>

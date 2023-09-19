@@ -1,0 +1,77 @@
+﻿@model Shopping.ViewModel.CartViewModel
+
+<div class="container">
+    <!-- Row 1: Cover Image -->
+    <div class="row">
+        <div class="col-12">
+            <img src="/path/to/cover-image.jpg" alt="Cover Image" class="img-fluid" />
+        </div>
+    </div>
+
+    <!-- Row 2: Shopping Cart -->
+    <div class="row mt-4">
+        <div class="col-12">
+            <h1 class="text-center">Shopping Cart</h1>
+
+            @if (Model == null || Model.CartItems == null || !Model.CartItems.Any())
+            {
+                <div class="alert alert-info mt-4">
+                    Your shopping cart is empty.
+                </div>
+            }
+            else 
+            {
+                <table class="table mt-4">
+                    <thead>
+                        <tr>
+                            <th scope="col">Product</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Total</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var cartitem in Model.CartItems)
+                        {
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        @if (cartitem.Product != null)
+                                        {
+                                            <img src="@cartitem.Product.ImageUrl" alt="Product Image" height="50" width="50" class="product-image mr-2" />
+                                            <span>@cartitem.Product.Name</span>
+                                        }
+                                        else
+                                        {
+                                            <span>N/A</span>
+                                        }
+                                    </div>
+                                </td>
+                                <td>@cartitem.Quantity</td>
+                                <td>@cartitem.TotalPrice.ToString("C")</td>
+                                <td>@(cartitem.Quantity * (cartitem.Product?.Price ?? 0)).ToString("C")</td>
+                                <td>
+                                    <a asp-controller="Cart" asp-action="Remove" asp-route-id="@cartitem.Id" class="btn btn-danger">
+                                        <i class="bi bi-trash-fill"></i> Remove
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="3"><strong>Total:</strong></td>
+                            <td>@Model.CartItems.Sum(item => item.Quantity * (item.Product?.Price ?? 0)).ToString("C")</td>
+                            <td>
+                                <form method="post" asp-controller="Cart" asp-action="Remove" asp-route-id="@Model.CartItem.Id">
+                                    <button type="submit" class="btn btn-danger">Buy</button>
+                                </form>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            }
+        </div>
+    </div>
+</div>

@@ -1,0 +1,166 @@
+﻿@model Shopping.ViewModel.ProductVM
+
+@{
+    ViewData["Title"] = "Products";
+}
+
+<style>
+    /* Header styles */
+    .header {
+        background-image: url('/ProductImage/download.jpg'); /* Set the background image URL */
+        background-size: cover; /* Cover the entire header with the background image */
+        background-repeat: no-repeat; /* Prevent the background image from repeating */
+        background-position: center; /* Center the background image */
+        color: #fff; /* Text color for the header */
+        padding: 40px 20px; /* Increase the top and bottom padding to increase the header height */
+    }
+
+
+    /* Styles for the product listing */
+    .product-card {
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        background-color: #fff;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+
+    .product-image {
+        width: 100%; /* Ensure the image scales to the container width */
+        max-height: 150px; /* Limit the maximum height of the image */
+        object-fit: contain; /* Maintain aspect ratio and fit within the container */
+        margin-bottom: 10px;
+    }
+
+    .product-name {
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .product-description {
+        font-size: 14px;
+        color: #555;
+        margin-bottom: 10px;
+    }
+
+    .product-price {
+        font-size: 16px;
+        color: #e47911; /* Amazon's price color */
+        margin-bottom: 10px;
+    }
+
+    .product-actions {
+        margin-top: 10px;
+    }
+
+    .product-action-button {
+        background-color: #f0c14b;
+        color: #111;
+        padding: 8px 16px;
+        border: none;
+        border-radius: 5px;
+        font-size: 14px;
+        cursor: pointer;
+    }
+
+    .secondary-header {
+        font-size: 24px;
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .search-bar {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px; /* Added margin to separate search box and button */
+    }
+
+    .search-input {
+        flex-grow: 1;
+        max-width: 100%; /* Set maximum width to 100% for responsiveness */
+        margin-bottom: 10px; /* Added margin for spacing */
+    }
+
+    .search-button {
+        background-color: #007bff; /* Button color */
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        padding: 6px 12px; /* Smaller button padding */
+        font-size: 14px;
+        cursor: pointer;
+        max-width: 100%; /* Set maximum width to 100% for responsiveness */
+    }
+</style>
+
+<div class="header">
+    <!-- You can add content inside the header if needed -->
+</div>
+
+<div class="container mt-5">
+    <div class="secondary-header">
+        <p>Discover our latest products</p>
+    </div>
+
+    <div class="search-bar">
+        <input type="text" maxlength="80" id="searchBox" placeholder="Search by name or category..." class="form-control search-input col-12 col-sm-6 col-md-4" />
+        <button id="searchButton" class="search-button col-12 col-sm-3 col-md-2">Search</button>
+    </div>
+
+    <div class="product-list row">
+        @foreach (var product in Model.Products)
+        {
+            <div class="product-card col-12 col-sm-6 col-md-4 col-lg-3">
+                <img src="@product.ImageUrl" alt="@product.Name" class="product-image" />
+                <div class="product-name">@product.Name</div>
+                <div class="product-description">@product.Description</div>
+                <div class="product-price">@product.Price.ToString("C")</div>
+                <div class="product-actions">
+                    <a asp-controller="Cart" asp-action="AddCart" asp-route-id="@product.Id">
+                        <button type="button" class="product-action-button">Add to Cart</button>
+                    </a>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<script>
+    // Get references to the search box, search button, and product list
+    const searchBox = document.getElementById('searchBox');
+    const searchButton = document.getElementById('searchButton');
+    const productList = document.querySelector('.product-list');
+
+    // Add a click event listener to the search button
+    searchButton.addEventListener('click', function () {
+        performSearch();
+    });
+
+    // Add an input event listener to the search box for instant search
+    searchBox.addEventListener('input', function () {
+        performSearch();
+    });
+
+    // Function to perform the search
+    function performSearch() {
+        // Get the search query from the input box
+        const query = searchBox.value.toLowerCase();
+
+        // Get all product cards
+        const productCards = productList.querySelectorAll('.product-card');
+
+        // Loop through the product cards and show/hide based on the query
+        productCards.forEach(productCard => {
+            const productName = productCard.querySelector('.product-name').textContent.toLowerCase();
+            if (productName.includes(query)) {
+                productCard.style.display = 'block'; // Show matching items
+            } else {
+                productCard.style.display = 'none';  // Hide non-matching items
+            }
+        });
+    }
+</script>
