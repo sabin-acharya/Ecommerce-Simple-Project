@@ -8,6 +8,9 @@
             ICart Carts { get; }
 
            ICartItems CartItems { get; }
+            
+        IOrder Order { get; }
+            IBuy Buys { get; }
        
             void Save();
 

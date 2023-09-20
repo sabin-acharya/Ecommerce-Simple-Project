@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Shopping.Data;
 
@@ -11,9 +12,10 @@ using Shopping.Data;
 namespace Shopping.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230920042305_ShoppingFInal")]
+    partial class ShoppingFInal
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -233,33 +235,6 @@ namespace Shopping.Data.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("Shopping.Models.Buy", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Address")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("CartItemId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("CustomerName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<double>("PhoneNumber")
-                        .HasColumnType("float");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CartItemId");
-
-                    b.ToTable("Buys");
-                });
-
             modelBuilder.Entity("Shopping.Models.Cart", b =>
                 {
                     b.Property<int>("Id")
@@ -326,24 +301,6 @@ namespace Shopping.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Categories");
-                });
-
-            modelBuilder.Entity("Shopping.Models.Order", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("CartItemsId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CartItemsId");
-
-                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("Shopping.Models.Product", b =>
@@ -427,17 +384,6 @@ namespace Shopping.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Shopping.Models.Buy", b =>
-                {
-                    b.HasOne("Shopping.Models.CartItem", "CartItem")
-                        .WithMany()
-                        .HasForeignKey("CartItemId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("CartItem");
-                });
-
             modelBuilder.Entity("Shopping.Models.Cart", b =>
                 {
                     b.HasOne("Shopping.Data.ApplicationUser", "User")
@@ -466,17 +412,6 @@ namespace Shopping.Data.Migrations
                     b.Navigation("Cart");
 
                     b.Navigation("Product");
-                });
-
-            modelBuilder.Entity("Shopping.Models.Order", b =>
-                {
-                    b.HasOne("Shopping.Models.CartItem", "CartItem")
-                        .WithMany()
-                        .HasForeignKey("CartItemsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("CartItem");
                 });
 
             modelBuilder.Entity("Shopping.Models.Product", b =>

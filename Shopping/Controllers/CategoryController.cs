@@ -30,7 +30,7 @@ namespace Shopping.Areas.Admin.Controllers
 
         }
 
-        // GET: Admin/Categories/Details/5
+       
         [HttpGet]
         
         public IActionResult CreateUpdate(int? id)

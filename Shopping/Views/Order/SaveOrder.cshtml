@@ -1,0 +1,74 @@
+﻿@model Shopping.ViewModel.VM
+@{
+    ViewData["Title"] = "SaveBuyDetails";
+}
+
+<div class="container mt-5">
+
+    <form asp-controller="Buy" asp-action="SaveBuyDetails" method="post">
+
+
+        <div class="border p-4 rounded shadow-lg">
+            <div class="row">
+
+                <!-- Right Column: Form Fields -->
+                <div class="col-md-8">
+                    <h2 class="text-primary mb-4">
+                        Buy
+                    </h2>
+                    <div asp-validation-summary="All"></div>
+                    <div class="mb-3">
+                        <label asp-for="Buy.CustomerName" class="form-label">Customer Name</label>
+                        <input asp-for="Buy.CustomerName" class="form-control" />
+                        <span asp-validation-for="Buy.CustomerName" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Buy.Address" class="form-label">Address</label>
+                        <input asp-for="Buy.Address" class="form-control" />
+                        <span asp-validation-for="Buy.Address" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Buy.PhoneNumber" class="form-label">PhoneNumber</label>
+                        <input asp-for="Buy.PhoneNumber" class="form-control" />
+                        <span asp-validation-for="Buy.PhoneNumber" class="text-danger"></span>
+                    </div>
+
+                    <form asp-action="SaveBuyDetails" asp-controller="Buy" method="post">
+                        <input type="hidden" asp-for="Buy.CartItemId" />
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+
+
+                    <div class="text-center">
+
+                        <a asp-controller="Cart" asp-action="Index" class="btn btn-secondary btn-lg ml-2">
+                            Back to List
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+@* @section Scripts{
+    @{
+        <script>
+            function displaySelectedImage(input) {
+                var selectedImage = document.getElementById('selectedImage');
+
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        selectedImage.src = e.target.result;
+                    };
+
+                    reader.readAsDataURL(input.files[0]);
+                } else {
+                    selectedImage.src = '#'; // Reset the image source if no file selected
+                }
+            }
+        </script>
+    }
+}  *@

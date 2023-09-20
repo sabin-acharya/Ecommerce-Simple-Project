@@ -29,9 +29,9 @@
             @Html.DisplayFor(model => model.CartItem.Product.Price)
         </dd>
 
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.CartItem.Product.ImageUrl)
-        </dt>
+        @* <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CartItem.Product.Image)
+        </dt> *@
         <dd class="col-sm-10">
             <img src="@Model.CartItem.Product.ImageUrl" alt="@Model.CartItem.Product.Name" class="img-thumbnail" />
         </dd>

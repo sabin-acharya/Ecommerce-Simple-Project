@@ -31,7 +31,7 @@
                             <th scope="col"></th>
                         </tr>
                     </thead>
-                    <tbody>
+                   <tbody>
                         @foreach (var cartitem in Model.CartItems)
                         {
                             <tr>
@@ -49,25 +49,28 @@
                                     </div>
                                 </td>
                                 <td>@cartitem.Quantity</td>
-                                <td>@cartitem.TotalPrice.ToString("C")</td>
-                                <td>@(cartitem.Quantity * (cartitem.Product?.Price ?? 0)).ToString("C")</td>
+                                <td>@cartitem.Product?.Price.ToString("C")</td>
+                                <td>@(cartitem.Quantity * (cartitem.Product?.Price?? 0))$</td>
                                 <td>
-                                    <a asp-controller="Cart" asp-action="Remove" asp-route-id="@cartitem.Id" class="btn btn-danger">
+                                    <a asp-controller="Cart" asp-action="Remove" class="btn btn-danger">
                                         <i class="bi bi-trash-fill"></i> Remove
                                     </a>
                                 </td>
+
                             </tr>
                         }
-                    </tbody>
+                    <td>
+                        <a asp-controller="Order" asp-action="SaveOrder" asp-route-id="@Model.CartItem.Id" class="btn btn-primary">
+                            Order
+                            <i class="bi bi-plus-circle"></i>
+                        </a>
+                    </td>
+                  </tbody>
                     <tfoot>
                         <tr>
                             <td colspan="3"><strong>Total:</strong></td>
                             <td>@Model.CartItems.Sum(item => item.Quantity * (item.Product?.Price ?? 0)).ToString("C")</td>
-                            <td>
-                                <form method="post" asp-controller="Cart" asp-action="Remove" asp-route-id="@Model.CartItem.Id">
-                                    <button type="submit" class="btn btn-danger">Buy</button>
-                                </form>
-                            </td>
+                            
                         </tr>
                     </tfoot>
                 </table>

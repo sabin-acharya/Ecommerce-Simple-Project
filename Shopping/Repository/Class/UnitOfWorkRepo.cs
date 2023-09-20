@@ -13,8 +13,10 @@ namespace Shopping.Repository.Class
 
         public ICart Carts { get; private set; }
 
-        
+        public IBuy Buys { get; private set; }
 
+        
+        public IOrder Order { get; private set; }
         public ICartItems CartItems {  get; private set; }
 
 
@@ -25,6 +27,8 @@ namespace Shopping.Repository.Class
             Product = new ProductRepo(context);
             CartItems = new CartItemRepo(context);
             Carts = new CartRepo(context);
+            Buys = new BuyRepo(context);
+            Order = new OrderRepo(context);
             
             
         }
