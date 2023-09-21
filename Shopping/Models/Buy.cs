@@ -11,8 +11,8 @@ namespace Shopping.Models
 
         public double PhoneNumber { get; set; }
        
-        public int OrderId { get; set; }
-        [ForeignKey("OrderId")]
-        public Order? Order { get; set; }
+        public int CartItemId { get; set; }
+        [ForeignKey("CartItemId")]
+        public CartItem? CartItem { get; set; }
     }
 }

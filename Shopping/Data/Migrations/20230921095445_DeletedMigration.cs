@@ -4,7 +4,7 @@
 
 namespace Shopping.Data.Migrations
 {
-    public partial class AddForeignKeyInBuy : Migration
+    public partial class DeletedMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

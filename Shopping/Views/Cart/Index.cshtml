@@ -52,19 +52,18 @@
                                 <td>@cartitem.Product?.Price.ToString("C")</td>
                                 <td>@(cartitem.Quantity * (cartitem.Product?.Price?? 0))$</td>
                                 <td>
-                                    <a asp-controller="Cart" asp-action="Remove" class="btn btn-danger">
+                                    <a asp-controller="Cart" asp-action="Remove" asp-route-id="@cartitem.Id" class="btn btn-danger">
                                         <i class="bi bi-trash-fill"></i> Remove
                                     </a>
                                 </td>
 
                             </tr>
+                            
                         }
-                    <td>
-                        <a asp-controller="Order" asp-action="SaveOrder" asp-route-id="@Model.CartItem.Id" class="btn btn-primary">
-                            Order
-                            <i class="bi bi-plus-circle"></i>
-                        </a>
-                    </td>
+                        <form asp-action="SaveOrder" asp-controller="Buy">
+                            <input type="hidden" asp-for="CartItem.Id" />
+                            <button class="btn btn-primary">Order</button>
+                        </form>
                   </tbody>
                     <tfoot>
                         <tr>

@@ -1,4 +1,5 @@
-﻿using Shopping.Data;
+﻿using Octokit;
+using Shopping.Data;
 using Shopping.Models;
 using Shopping.Repository.Interface;
 
@@ -25,6 +26,12 @@ namespace Shopping.Repository.Class
 
                 }
             
+        }
+        List<Buy> IBuy.GetBuy(int Id, string includeProperties)
+        {
+            return _context.Buys
+           .Where(buy => buy.CartItemId == Id)
+           .ToList();
         }
     }
 }

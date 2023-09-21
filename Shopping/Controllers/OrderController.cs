@@ -16,9 +16,11 @@ namespace Shopping.Controllers
         public IActionResult Index(int? id)
         {
 
-          
-            
 
+            var order = _unitofwork.Order.GetAll();
+            
+           
+            _unitofwork.Save();
             return View();
         }
 
@@ -26,7 +28,7 @@ namespace Shopping.Controllers
         public IActionResult SaveOrder(int? id) 
         {
             OrderVM vm = new OrderVM();
-            
+           
             if (id == null || id == 0)
             {
                 return View(vm);

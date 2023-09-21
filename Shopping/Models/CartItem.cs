@@ -22,5 +22,7 @@ namespace Shopping.Models
         [ForeignKey("CartId")]
         public Cart? Cart { get; set; }
 
+
+
     }
 }

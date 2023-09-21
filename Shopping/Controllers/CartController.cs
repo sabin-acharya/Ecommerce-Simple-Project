@@ -56,11 +56,9 @@ namespace Shopping.Controllers
             return RedirectToAction("AddCart");
         }
 
-
         [HttpGet]
         public async Task<IActionResult> AddCart(int id)
         {
-
 
             CartViewModel cartvm = new CartViewModel();
             cartvm.CartItem.Product = _unitOfWork.Product.GetT(x => x.Id == id);
@@ -79,7 +77,7 @@ namespace Shopping.Controllers
         {
             if (!User.Identity.IsAuthenticated)
             {
-               
+
                 return RedirectToAction("Login");
             }
 
@@ -104,7 +102,9 @@ namespace Shopping.Controllers
                 Quantity = quantity,
                 TotalPrice = (long)(quantity * products.Price),
                 CartId = cart.Id
-            };
+
+
+              };
 
             _unitOfWork.CartItems.Add(cartItem);
             _unitOfWork.Save();

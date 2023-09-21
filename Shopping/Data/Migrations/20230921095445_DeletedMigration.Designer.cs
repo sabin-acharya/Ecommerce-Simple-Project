@@ -12,8 +12,8 @@ using Shopping.Data;
 namespace Shopping.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230920061029_AddBuyModelLong")]
-    partial class AddBuyModelLong
+    [Migration("20230921095445_DeletedMigration")]
+    partial class DeletedMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -246,7 +246,7 @@ namespace Shopping.Data.Migrations
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("CartItemId")
+                    b.Property<int>("CartItemId")
                         .HasColumnType("int");
 
                     b.Property<string>("CustomerName")
@@ -328,6 +328,24 @@ namespace Shopping.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Categories");
+                });
+
+            modelBuilder.Entity("Shopping.Models.Order", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("CartItemsId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CartItemsId");
+
+                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("Shopping.Models.Product", b =>
@@ -415,7 +433,9 @@ namespace Shopping.Data.Migrations
                 {
                     b.HasOne("Shopping.Models.CartItem", "CartItem")
                         .WithMany()
-                        .HasForeignKey("CartItemId");
+                        .HasForeignKey("CartItemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("CartItem");
                 });
@@ -448,6 +468,17 @@ namespace Shopping.Data.Migrations
                     b.Navigation("Cart");
 
                     b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("Shopping.Models.Order", b =>
+                {
+                    b.HasOne("Shopping.Models.CartItem", "CartItem")
+                        .WithMany()
+                        .HasForeignKey("CartItemsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("CartItem");
                 });
 
             modelBuilder.Entity("Shopping.Models.Product", b =>
