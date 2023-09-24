@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Text.Encodings.Web;
@@ -15,7 +16,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using Shopping.Data;
@@ -27,6 +30,7 @@ namespace Shopping.Areas.Identity.Pages.Account
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IUserStore<ApplicationUser> _userStore;
+        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IUserEmailStore<ApplicationUser> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
@@ -34,7 +38,8 @@ namespace Shopping.Areas.Identity.Pages.Account
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
             IUserStore<ApplicationUser> userStore,
-            SignInManager<ApplicationUser> signInManager,
+            SignInManager<ApplicationUser> signInManager, 
+            RoleManager<IdentityRole> roleManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender)
         {
@@ -44,6 +49,7 @@ namespace Shopping.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _roleManager = roleManager;
         }
 
         /// <summary>
@@ -104,6 +110,19 @@ namespace Shopping.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+
+
+            //Add role 
+            
+            [Required]
+            [Display(Name = "Role")]
+            public string Role {  get; set; }
+
+
+            [Required]
+            [ValidateNever]
+            [Display(Name = "Roles List")]
+            public IEnumerable<SelectListItem> RoleList { get; set; }
         }
 
 
@@ -111,7 +130,21 @@ namespace Shopping.Areas.Identity.Pages.Account
         {
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+
+            Input = new InputModel()
+            {
+                // Populate RoleList with available roles
+                RoleList = _roleManager.Roles.Select(x => x.Name).Select(i => new SelectListItem
+                {
+                    Text = i,
+                    Value = i
+                })
+            };
+
         }
+           
+     
+
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
@@ -124,41 +157,44 @@ namespace Shopping.Areas.Identity.Pages.Account
                 {
                     UserName = Input.Email,
                     Email = Input.Email,
-                    
                 };
 
-                var result = await _userManager.CreateAsync(user, Input.Password);
-
-                if (result.Succeeded)
+                if (await _roleManager.RoleExistsAsync(Input.Role))
                 {
-                    // Set EmailConfirmed to true to confirm the user's email
-                    user.EmailConfirmed = true;
-                    await _userManager.UpdateAsync(user);
+                    // Assign the selected role to the user
+                    var result = await _userManager.CreateAsync(user, Input.Password);
 
-                    if (_userManager.Options.SignIn.RequireConfirmedAccount)
+                    if (result.Succeeded)
                     {
-                        return RedirectToPage("~/", new { email = Input.Email, returnUrl = returnUrl });
+                        // Set EmailConfirmed to true to confirm the user's email
+                        user.EmailConfirmed = true;
+                        await _userManager.UpdateAsync(user);
+
+                        if (_userManager.Options.SignIn.RequireConfirmedAccount)
+                        {
+                            return RedirectToPage("~/", new { email = Input.Email, returnUrl = returnUrl });
+                        }
+                        else
+                        {
+                            await _signInManager.SignInAsync(user, isPersistent: false);
+                            return LocalRedirect(returnUrl);
+                        }
                     }
-                    else
+
+                    foreach (var error in result.Errors)
                     {
-                        await _signInManager.SignInAsync(user, isPersistent: false);
-                        return LocalRedirect(returnUrl);
+                        ModelState.AddModelError(string.Empty, error.Description);
                     }
                 }
-
-               
-                foreach (var error in result.Errors)
+                else
                 {
-                    ModelState.AddModelError(string.Empty, error.Description);
+                    ModelState.AddModelError(string.Empty, "Selected role does not exist.");
                 }
-
-               
-                return Page();
             }
 
-           
             return Page();
         }
+
 
 
         //var user = new ApplicationUser();
@@ -193,7 +229,7 @@ namespace Shopping.Areas.Identity.Pages.Account
         //        await _signInManager.SignInAsync(user, isPersistent: false);
         //        return LocalRedirect(returnUrl);
         //    }
-    
+
         //    foreach (var error in result.Errors)
         //        {
         //            ModelState.AddModelError(string.Empty, error.Description);

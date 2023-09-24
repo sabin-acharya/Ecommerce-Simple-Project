@@ -2,6 +2,8 @@
 
 namespace Shopping.Data
 {
+    //CustomUser
+
     public class ApplicationUser : IdentityUser
     {
       

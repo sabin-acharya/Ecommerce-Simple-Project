@@ -17,8 +17,9 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
     // Configure Identity options as needed
     options.SignIn.RequireConfirmedAccount = true;
 })
-    //.AddRoles<ApplicationUser>()
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>()
+    .AddDefaultUI()
     .AddDefaultTokenProviders(); // Add this line to configure default token providers for password reset, etc.
 
 builder.Services.AddControllersWithViews();

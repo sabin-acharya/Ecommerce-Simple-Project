@@ -42,12 +42,19 @@
                             <input asp-for="Input.ConfirmPassword"  id="ConformPassword" class="form-control" autocomplete="new-password" aria-required="true" />
                             <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
                         </div>
+                        <div class="mb-3">
+                            <label for="Role" class="form-label">Roles</label>
+                            <select asp-for="Input.Role" asp-items="@Model.Input.RoleList" class="form-select">
+                                <option value="">--Select a Role--</option>
+                               <span asp-validation-for="Input.Role" class="text-danger"></span>"
+                            </select>
+                        </div>
                         <button asp-controller="" id="registerSubmit" type="submit" class="w-100 btn btn-primary">Register</button>
                     </form>
                 </div>
             </div>
         </div>
-        <div class="col-md-6 col-md-offset-2">
+       @*  <div class="col-md-6 col-md-offset-2">
             <section>
                 <h3>Use another service to register.</h3>
                 <hr />
@@ -78,7 +85,7 @@
                     }
                 }
             </section>
-        </div>
+        </div> *@
     </div>
 </div>
 

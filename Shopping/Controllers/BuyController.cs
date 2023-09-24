@@ -22,13 +22,14 @@ namespace Shopping.Controllers
         [HttpGet]
         public IActionResult SaveOrder(int? id)
         {
+
             BuyVM vm = new BuyVM();
             ViewBag.CartId = id;
             if (id != null || id != 0)
             {
                 return View(vm);
             }
-            
+        
             return View();
             //else
             //{
@@ -44,7 +45,7 @@ namespace Shopping.Controllers
             //}
         }
         [HttpPost]
-        public IActionResult SaveOrder(BuyVM buyvm, int id)
+        public IActionResult SaveOrder([FromBody]BuyVM buyvm, int Id)
         {
             //if (ModelState.IsValid && buyvm != null && buyvm.Buy != null)
             //{
@@ -56,13 +57,28 @@ namespace Shopping.Controllers
             //    {
             //        _unitofwork.Buys.Add(buyvm.Buy);
             //        TempData["success"] = "Category Created Done";
-
+             
             //    }
-                
+
             //    _unitofwork.Save();
             //    return RedirectToAction("Index");
 
             //}
+            Id = buyvm.Buy.CartItemId;
+            if(Id == 0) 
+            { 
+                CartViewModel cvm = new CartViewModel();
+                cvm.CartItems = _unitofwork.CartItems.GetAll();
+                foreach (var cartItem in cvm.CartItems)
+                {
+                     Id = cartItem.Id;
+                    
+                    _unitofwork.Save();
+                }
+            }
+
+            _unitofwork.Buys.Add(buyvm.Buy);
+            _unitofwork.Save();
             return RedirectToAction("Index");
         }
             //{

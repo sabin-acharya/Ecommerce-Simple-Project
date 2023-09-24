@@ -47,7 +47,8 @@ namespace Shopping.Controllers
                 {
                     CartViewModel cvm = new CartViewModel();
                     cvm.CartItems = cartItems;
-                  
+                    //_unitOfWork.CartItems.Add(cvm.CartItem);
+                    //_unitOfWork.Save();
                     return View(cvm);
                 }
             }
@@ -82,7 +83,7 @@ namespace Shopping.Controllers
             }
 
             var ap = await _userManager.GetUserAsync(User);
-            var products = _unitOfWork.Product.GetT(x => x.Id == id);
+            var product = _unitOfWork.Product.GetT(x => x.Id == id);
 
             var cart = _unitOfWork.Carts.GetT(x => x.UserId == ap.Id);
 
@@ -92,6 +93,7 @@ namespace Shopping.Controllers
                 {
                     UserId = ap.Id
                 };
+                
                 _unitOfWork.Carts.Add(cart);
                 _unitOfWork.Save();
             }
@@ -99,12 +101,14 @@ namespace Shopping.Controllers
             var cartItem = new CartItem
             {
                 ProductId = id,
+                
+                TotalPrice = (long)(quantity * product.Price),
+                CartId = cart.Id,
+                
                 Quantity = quantity,
-                TotalPrice = (long)(quantity * products.Price),
-                CartId = cart.Id
 
 
-              };
+            };
 
             _unitOfWork.CartItems.Add(cartItem);
             _unitOfWork.Save();

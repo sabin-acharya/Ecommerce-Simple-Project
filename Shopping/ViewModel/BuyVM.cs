@@ -5,13 +5,10 @@ namespace Shopping.ViewModel
 {
     public class BuyVM
     {
-        public int CartId { get; set; }
+        public Buy Buy { get; set; } = new Buy();
 
-        public string CustomerName { get; set; }
 
-        public string Address { get; set; }
-
-        public string PhoneNumber { get; set; }
+        public IEnumerable<Buy> Buys { get; set; } = new List<Buy>();
 
 
     }

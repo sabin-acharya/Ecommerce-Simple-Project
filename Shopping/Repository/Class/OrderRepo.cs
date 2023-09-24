@@ -18,5 +18,18 @@ namespace Shopping.Repository.Class
         {
             throw new NotImplementedException();
         }
+        public void AddCartItemId(CartItem cartItem)
+        {
+            var orderDB = _context.Orders.FirstOrDefault(x => x.Id == cartItem.Id);
+            //var cartitemDB = _context.CartItems.FirstOrDefault(x => x.Id == id);
+            
+            if (orderDB == null)
+            {
+                orderDB.CartItemsId = cartItem.Id;
+            }
+            _context.Orders.Add(orderDB);
+        }
+
+       
     }
 }

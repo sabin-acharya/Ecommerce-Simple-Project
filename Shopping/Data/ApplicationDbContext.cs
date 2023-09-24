@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Shopping.Models;
 
@@ -10,6 +11,8 @@ namespace Shopping.Data
             : base(options)
         {
         }
+
+        //Database Tables
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
 
@@ -19,15 +22,30 @@ namespace Shopping.Data
 
         public DbSet<Order> Orders { get; set; }
         public DbSet<Buy> Buys { get; set; }
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        protected override void OnModelCreating(ModelBuilder Builder)
         {
-            base.OnModelCreating(modelBuilder);
+            base.OnModelCreating(Builder);
+            {
+                base.OnModelCreating(Builder);
+                seedRoles(Builder);
+            }
 
             //modelBuilder.Entity<CartItem>()
             //    .HasOne(ct => ct.Cart)
             //    .WithOne()
             //    .HasForeignKey<CartItem>(ct => ct.CartId)
             //    .HasPrincipalKey<Cart>(cart => cart.Id);
+        }
+
+        // Assigining the roles
+        private static void seedRoles(ModelBuilder Builder)
+        {
+            Builder.Entity<IdentityRole>().HasData
+                (
+                new IdentityRole() { Name = "Admin", ConcurrencyStamp = "1", NormalizedName = "Admin" },
+                new IdentityRole() { Name = "Customer", ConcurrencyStamp = "2", NormalizedName = "Customer" }
+                );
+
         }
         
     }

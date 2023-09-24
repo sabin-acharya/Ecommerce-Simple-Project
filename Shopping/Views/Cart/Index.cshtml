@@ -60,17 +60,19 @@
                             </tr>
                             
                         }
-                        <form asp-action="SaveOrder" asp-controller="Buy">
-                            <input type="hidden" asp-for="CartItem.Id" />
-                            <button class="btn btn-primary">Order</button>
-                        </form>
+                        
                   </tbody>
                     <tfoot>
                         <tr>
+                           
                             <td colspan="3"><strong>Total:</strong></td>
                             <td>@Model.CartItems.Sum(item => item.Quantity * (item.Product?.Price ?? 0)).ToString("C")</td>
                             
                         </tr>
+                        <a asp-action="SaveOrder" asp-controller="Buy">
+                            <input type="hidden" asp-for="CartItem.Id" />
+                            <button class="btn btn-primary">Order</button>
+                        </a>
                     </tfoot>
                 </table>
             }

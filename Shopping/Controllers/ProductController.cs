@@ -6,7 +6,7 @@ using Shopping.Repository.Interface;
 using Shopping.ViewModel;
 namespace Shopping.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class ProductController : Controller
     {
 
