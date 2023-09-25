@@ -1,48 +1,91 @@
-﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-for details on configuring this project to bundle and minify static web assets. */
-
-a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
+﻿*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
+
+body {
+    font-family: "Poppins", sans-serif;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+}
+
+nav {
+    flex: 1;
+    text-align: right;
+}
+
+    nav ul {
+        display: inline-block;
+        list-style-type: none;
+    }
+
+        nav ul li {
+            display: inline-block;
+            margin-right: 20px;
+        }
 
 a {
-  color: #0077cc;
+    text-decoration: none;
+    color: #555;
 }
 
-.btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+p {
+    color: #555;
 }
 
-.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+.container {
+    max-width: 1300px;
+    margin: auto;
+    padding-left: 25px;
+    padding-right: 25px;
 }
 
-.border-top {
-  border-top: 1px solid #e5e5e5;
-}
-.border-bottom {
-  border-bottom: 1px solid #e5e5e5;
-}
-
-.box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+.row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-around;
 }
 
-button.accept-policy {
-  font-size: 1rem;
-  line-height: inherit;
+.col-2 {
+    flex-basis: 50%;
+    min-width: 300px;
 }
 
-.footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-  line-height: 60px;
+    .col-2 img {
+        max-width: 100%;
+        padding: 50px 0;
+    }
+
+    .col-2 h1 {
+        font-size: 50px;
+        line-height: 60px;
+        margin: 25px 0;
+    }
+
+.btn {
+    display: inline-block;
+    background: #ff523b;
+    color: #ffffff;
+    padding: 8px 30px;
+    margin: 30px 0;
+    border-radius: 30px;
+    transition: background 0.5s;
 }
+
+    .btn:hover {
+        background: #563434;
+    }
+
+.header {
+    background: radial-gradient(#fff, #ffd6d6);
+}
+
+    .header .row {
+        margin-top: 70px;
+    }

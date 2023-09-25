@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿<!-- Header Section -->
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -12,6 +13,7 @@
     <link rel="stylesheet" href="~/css/Minty.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Shopping.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/Temp.css" asp-append-version="true" />
 
     <!-- Include jQuery, Popper.js, and Bootstrap JavaScript from CDNs -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -22,8 +24,8 @@
     <header>
         <nav nav class="navbar navbar-expand-sm bg-primary" data-bs-theme="dark">
             <div class="container-fluid" data-bs-theme="dark">
-                <a class="navbar-brand text-dark"  asp-area="" asp-controller="Home" asp-action="Index">Shopping</a>
-                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                <a class="navbar-brand text-dark" asp-area="" asp-controller="Home" asp-action="Index">Shopping</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -33,30 +35,30 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        
-                        <li class="nav-item">
+
+                        @* <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                        <li class="nav-item">
-                            
-                        </li>
-                        <li class="nav-item">
+                        </li> *@
+                        @* <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Cart" asp-action="Index"><img src="https://i.ibb.co/PNjjx3y/cart.png" alt="" width="30px" height="30px" /></a>
+                            <img src="https://i.ibb.co/6XbqwjD/menu.png" alt="" class="menu-icon" onclick="menutoggle()" />
+                        </li> *@
+                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Cart" asp-action="Index">CartItems</a>
-                        </li>
-                        <li class="nav-item">
+                        </li> 
+
+                        @* <li class="nav-item">
                             <a class="nav-link text-dark" href="#">About</a>
-                        </li>
-                       
+                        </li> *@
+
                         <li class="nav-item dropdown text-dark">
                             <a class="nav-link text-dark dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Add Products</a>
                             <div class="dropdown-menu">
-                                
-                                    
-                                
+
                                 <a class="nav-link text-white" asp-area="" asp-controller="Product" asp-action="Index">Product</a>
                                 <a class="nav-link text-white" asp-area="" asp-controller="Category" asp-action="Index">Category</a>
                                 <div class="dropdown-divider"></div>
-                               
+
                             </div>
                         </li>
                     </ul>
@@ -68,35 +70,35 @@
                 </div>
             </div>
         </nav>
-       @* <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3" data-bs-theme="dark">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Shopping</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Category" asp-action="Index">Category</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="Index">Product</a>
-                        </li>
-                        <li class="nav-item">
-                          
-                            <a class="nav-link text-dark" asp-area=""  asp-controller="Cart" asp-action="Index">CartItems</a>
-                        </li>
-                    </ul>
-                    <partial name="_LoginPartial" />
-                </div>
-            </div>
+        @* <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3" data-bs-theme="dark">
+        <div class="container-fluid">
+        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Shopping</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+        <ul class="navbar-nav flex-grow-1">
+        <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="" asp-controller="Category" asp-action="Index">Category</a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="Index">Product</a>
+        </li>
+        <li class="nav-item">
+
+        <a class="nav-link text-dark" asp-area=""  asp-controller="Cart" asp-action="Index">CartItems</a>
+        </li>
+        </ul>
+       
+        </div>
+        </div>
         </nav>*@
     </header>
     <div class="container">
@@ -104,16 +106,67 @@
             @RenderBody()
         </main>
     </div>
+    @await RenderSectionAsync("Scripts", required: false)
 
-    <footer class="border-top footer text-muted">
+    
+    @* <div class="container">
+    >
+   @*  <footer class="border-top footer text-muted">
         <div class="container">
             &copy; @DateTime.Now.Year - Shopping - <a asp-area="" asp-controller="Home" asp-action="Index">Privacy</a>
         </div>
-    </footer>
+    </footer *@>
+    <!-- Include jQuery and Bootstrap JavaScript from local files -->
+    
+ 
+ <div class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="footer-col-1">
+                <h3>Download Our App</h3>
+                <p>Download App for Android and iso mobile phone.</p>
+                <div class="app-logo">
+                    <img src="https://i.ibb.co/KbPTYYQ/play-store.png" alt="" />
+                    <img src="https://i.ibb.co/hVM4X2p/app-store.png" alt="" />
+                </div>
+            </div>
+
+            <div class="footer-col-2">
+                <img src="https://i.ibb.co/j3FNGj7/logo-white.png" alt="" />
+                <p>
+                    Our Purpose Is To Sustainably Make the Pleasure and Benefits of
+                    Sports Accessible to the Many.
+                </p>
+            </div>
+
+            <div class="footer-col-3">
+                <h3>Useful Links</h3>
+                <ul>
+                    <li>Coupons</li>
+                    <li>Blog Post</li>
+                    <li>Return Policy</li>
+                    <li>Join Affiliate</li>
+                </ul>
+            </div>
+
+            <div class="footer-col-4">
+                <h3>Follow us</h3>
+                <ul>
+                    <li>Facebook</li>
+                    <li>Twitter</li>
+                    <li>Instagram</li>
+                    <li>YouTube</li>
+                </ul>
+            </div>
+        </div>
+        
+        <p class="copyright">Copyright &copy; 2021 - Dish Home Store</p>
+    </div>
+   
+    </div>  
     <!-- Include jQuery and Bootstrap JavaScript from local files -->
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
 </body>
-</html>
+
