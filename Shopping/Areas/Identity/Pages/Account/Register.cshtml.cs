@@ -118,10 +118,9 @@ namespace Shopping.Areas.Identity.Pages.Account
             [Display(Name = "Role")]
             public string Role {  get; set; }
 
-
             [Required]
             [ValidateNever]
-            [Display(Name = "Roles List")]
+            [Display(Name = "RolesList")]
             public IEnumerable<SelectListItem> RoleList { get; set; }
         }
 
@@ -142,8 +141,8 @@ namespace Shopping.Areas.Identity.Pages.Account
             };
 
         }
-           
-     
+
+
 
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
@@ -153,15 +152,16 @@ namespace Shopping.Areas.Identity.Pages.Account
 
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser
-                {
-                    UserName = Input.Email,
-                    Email = Input.Email,
-                };
-
                 if (await _roleManager.RoleExistsAsync(Input.Role))
                 {
-                    // Assign the selected role to the user
+                    var user = new ApplicationUser
+                    {
+                        FirstName = Input.FirstName,
+                        LastName = Input.LastName,
+                        UserName = Input.Email,
+                        Email = Input.Email
+                    };
+
                     var result = await _userManager.CreateAsync(user, Input.Password);
 
                     if (result.Succeeded)
@@ -169,6 +169,9 @@ namespace Shopping.Areas.Identity.Pages.Account
                         // Set EmailConfirmed to true to confirm the user's email
                         user.EmailConfirmed = true;
                         await _userManager.UpdateAsync(user);
+
+                        // Assign the selected role to the user
+                        await _userManager.AddToRoleAsync(user, Input.Role);
 
                         if (_userManager.Options.SignIn.RequireConfirmedAccount)
                         {
@@ -194,6 +197,7 @@ namespace Shopping.Areas.Identity.Pages.Account
 
             return Page();
         }
+
 
 
 

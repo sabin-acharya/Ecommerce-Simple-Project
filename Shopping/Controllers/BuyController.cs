@@ -22,14 +22,13 @@ namespace Shopping.Controllers
         [HttpGet]
         public IActionResult SaveOrder(int? id)
         {
-
+           
             BuyVM vm = new BuyVM();
-            ViewBag.CartId = id;
+            ViewBag.CartItemId = id;
             if (id != null || id != 0)
             {
                 return View(vm);
             }
-        
             return View();
             //else
             //{
