@@ -42,12 +42,12 @@ namespace Shopping.Controllers
             {
                 // Assuming that you have a method to retrieve cart items by UserId
                 var cartItems = _unitOfWork.CartItems.GetUserCartItems(id, includeProperties:"Products");
-
+                
                 if (cartItems != null)
                 {
                     CartViewModel cvm = new CartViewModel();
                     cvm.CartItems = cartItems;
-                    //_unitOfWork.CartItems.Add(cvm.CartItem);
+                    //_unitOfWork.orders.Add(cvm.CartItem);
                     //_unitOfWork.Save();
                     return View(cvm);
                 }
@@ -112,7 +112,7 @@ namespace Shopping.Controllers
 
             _unitOfWork.CartItems.Add(cartItem);
             _unitOfWork.Save();
-
+            
             return RedirectToAction(nameof(Index));
         }
 
