@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Your Website Title</title>
     <link rel="stylesheet" href="styles.css"> 
-    <link rel="stylesheet" href="~/css/Temp.css" asp-append-version="true" /><!-- Link to your CSS file -->
+    <link rel="stylesheet" href="~/css/Temp.css" asp-append-version="true" />
 </head>
 <body>
     <!-- Header Section -->
@@ -54,12 +54,13 @@
     <!-- Featured Products Section -->
     <section class="featured-products">
         <div class="container">
-            <h2 class="section-title">Featured Products</h2>
+            <h2 class="section-title" align="center">Featured Products</h2>
             <div class="search-bar">
                 <input type="text" maxlength="80" id="searchBox" placeholder="Search by name or category..." class="form-control search-input col-12 col-sm-6 col-md-4" />
                 <button id="searchButton" class="search-button col-12 col-sm-3 col-md-2">Search</button>
             </div>
-            <div class="product-list"> <!-- Add this product-list wrapper -->
+            <div class="product-list">
+                <!-- Add this product-list wrapper -->
                 <div class="row">
                     <!-- Add your product cards here -->
                     @foreach (var product in Model.Products)
@@ -67,22 +68,25 @@
                         <div class="col-12 col-sm-6 col-md-4 col-lg-4">
                             <div class="product-card">
                                 <img src="@product.ImageUrl" alt="@product.Name" class="product-image" />
-                                <div class="product-name">@product.Name</div>
-                                <div class="product-description">@product.Description</div>
-                                <div class="product-price">@product.Price.ToString("C")</div>
-                                <div class="product-actions">
-                                    <a asp-controller="Cart" asp-action="AddCart" asp-route-id="@product.Id">
-                                        <button type="button" class="product-action-button">Add
-                                    </a>
-                                    <div class="rating">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="far fa-star"></i>
+                                <div class="product-details">
+                                    <div class="product-name">@product.Name</div>
+                                    <div class="product-description">@product.Description</div>
+                                    <div class="product-price">@product.Price.ToString("C")</div>
+                                    <div class="product-actions">
+                                        <a asp-controller="Cart" asp-action="AddCart" asp-route-id="@product.Id">
+                                            <button type="button" class="product-action-button  button button1">AddToCart</button>
+                                        </a>
+                                        <div class="rating">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="far fa-star"></i>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+
                         </div>
                     }
                 </div>
@@ -237,7 +241,6 @@
     function performSearch() {
         // Get the search query from the input box
         const query = searchBox.value.toLowerCase();
-
         // Get all product cards
         const productCards = productList.querySelectorAll('.product-card');
 
@@ -252,3 +255,10 @@
         });
     }
 </script>
+
+<style>
+    body {
+        background-color: hsla(0, 100%, 70%, 0.3);
+        
+    }
+</style>

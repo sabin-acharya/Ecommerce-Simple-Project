@@ -4,10 +4,10 @@
     ViewData["Title"] = "AddCart";
 }
 
-<h1>Add to Cart</h1>
+<h1 align="Center">Add to Cart</h1>
 
 <div>
-    <h2>Product Details</h2>
+    
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
@@ -51,10 +51,10 @@
         </div>
 
         <!-- Move the "Buy" button outside of the loop -->
-        <button type="submit" class="btn btn-primary">Add to Cart</button>
+        <button type="submit"  class="btn btn-primary">Add to Cart</button>
     </form>
 
-    <a asp-action="Index" class="btn btn-secondary">Back to Product List</a>
+    <a asp-controller="Home" asp-action="Index" class="btn btn-secondary">Back to Product List</a>
 </div>
 
 <script>

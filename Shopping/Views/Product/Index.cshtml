@@ -4,15 +4,15 @@
     ViewData["Title"] = "Index";
 }
 <div class="cointainer p-3">
-    <div class="row pt-4">
+    <div class="row pt-4" align="center">
         <div class="col-6">
-            <h2 class="text-primary"> List</h2>
+            <h2 class="text-primary">Product List</h2>
         </div>
 
     </div>
 
 
-    <table class="table table-hover table-bordered table-striped" style="width:100%">
+    <table class="table table-hover table-bordered table-striped" id="customers" style="width:100%">
         <style>
             table {
                 border-collapse: collapse;
@@ -55,7 +55,18 @@
                         </td>
                     </tr>
                 }
+                
             }
+            <tr>
+                <td colspan="3">
+                    <div class="col-10 text-end" align="center">
+                        <a asp-controller="Product" asp-action="CreateUpdate" class="btn btn-primary">
+                            Add Products
+                            <i class="bi bi-plus-circle"></i>
+                        </a>
+                    </div>
+                </td>
+            </tr>
         </tbody>
     </table>
 
