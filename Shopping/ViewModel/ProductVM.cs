@@ -6,10 +6,10 @@ namespace Shopping.ViewModel
 {
     public class ProductVM
     {
-        public Product Product { get; set; } = new Product();//single category
+        public ProductModel Product { get; set; } = new ProductModel();//single category
 
         [ValidateNever]
-        public IEnumerable<Product> Products { get; set; } = new List<Product>(); //list of category
+        public IEnumerable<ProductModel> Products { get; set; } = new List<ProductModel>(); //list of category
 
         public IEnumerable<SelectListItem>? Categories { get; set; }
 

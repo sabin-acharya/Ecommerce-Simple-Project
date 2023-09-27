@@ -5,7 +5,7 @@ using Shopping.Repository.Interface;
 namespace Shopping.Repository.Class
 {
 
-    public class ProductRepo : RepositoryRepo<Product>, IProduct
+    public class ProductRepo : RepositoryRepo<ProductModel>, IProduct
     {
         private readonly ApplicationDbContext _context;
         public ProductRepo(ApplicationDbContext context) : base(context)
@@ -15,7 +15,7 @@ namespace Shopping.Repository.Class
 
         }
 
-        public void Update(Product product)
+        public void Update(ProductModel product)
         {
             var productDB = _context.Products.FirstOrDefault(x => x.Id == product.Id);
             if (productDB != null)

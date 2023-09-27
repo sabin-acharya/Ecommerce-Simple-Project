@@ -4,7 +4,7 @@
 }
 
 <div class="container p-3">
-    <form asp-controller="Category" asp-action="CreateUpdate" method="post">
+    <form asp-controller="Category" asp-action="CategoryCreateUpdate" method="post">
         <input type="hidden" asp-for="Category.Id" />
         <div class="border p-3 mt-4">
             <div align="center" class="row pb-2">
@@ -43,7 +43,7 @@
                     <button type="submit" class="btn btn-primary" style="width:150px">Update</button>
                 }
 
-                <a asp-controller="Category" asp-action="Index" class="btn btn-secondary" style="width:150px">Back to List</a>
+                <a asp-controller="Category" asp-action="CategoryIndex" class="btn btn-secondary" style="width:150px">Back to List</a>
             </div>
         </div>
     </form>

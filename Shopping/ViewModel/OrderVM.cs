@@ -4,8 +4,8 @@ namespace Shopping.ViewModel
 {
     public class OrderVM
     {
-        public Order Order { get; set; } = new Order();
+        public OrderModel Order { get; set; } = new OrderModel();
 
-        public IEnumerable<Order> Orders { get; set; } = new List<Order>();
+        public IEnumerable<OrderModel> Orders { get; set; } = new List<OrderModel>();
     }
 }

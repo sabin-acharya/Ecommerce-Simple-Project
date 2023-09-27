@@ -3,11 +3,11 @@ using Shopping.Repository.Class;
 
 namespace Shopping.Repository.Interface
 {
-    public interface ICartItems : IRepository<CartItem>
+    public interface ICartItems : IRepository<CartItemModel>
     {
-        void Update(CartItem cartItem);
+        void Update(CartItemModel cartItem);
         
-        List<CartItem> GetUserCartItems(string userId, string includeProperties);
+        List<CartItemModel> GetUserCartItems(string userId, string includeProperties);
         
     }
 }

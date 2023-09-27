@@ -13,15 +13,15 @@ namespace Shopping.Data
         }
 
         //Database Tables
-        public DbSet<Product> Products { get; set; }
-        public DbSet<Category> Categories { get; set; }
+        public DbSet<ProductModel> Products { get; set; }
+        public DbSet<CategoryModel> Categories { get; set; }
 
-        public DbSet<CartItem> CartItems { get; set; }
+        public DbSet<CartItemModel> CartItems { get; set; }
 
-        public DbSet<Cart> Carts { get; set; }
+        public DbSet<CartModel> Carts { get; set; }
 
-        public DbSet<Order> Orders { get; set; }
-        public DbSet<Buy> Buys { get; set; }
+        public DbSet<OrderModel> Orders { get; set; }
+        public DbSet<BuyModel> Buys { get; set; }
         protected override void OnModelCreating(ModelBuilder Builder)
         {
             base.OnModelCreating(Builder);

@@ -37,7 +37,7 @@
         </dd>
     </dl>
 
-    <form asp-action="AddCart" asp-controller="Cart" method="post">
+    <form asp-action="CartAddCart" asp-controller="Cart" method="post">
         <input type="hidden" asp-for="CartItem.Id" />
 
         <div class="form-group">
@@ -54,7 +54,7 @@
         <button type="submit"  class="btn btn-primary">Add to Cart</button>
     </form>
 
-    <a asp-controller="Home" asp-action="Index" class="btn btn-secondary">Back to Product List</a>
+    <a asp-controller="Home" asp-action="HomeIndex" class="btn btn-secondary">Back to Product List</a>
 </div>
 
 <script>

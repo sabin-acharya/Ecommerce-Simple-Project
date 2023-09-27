@@ -23,7 +23,7 @@ namespace Shopping.Areas.Admin.Controllers
 
         // GET: Admin/Categories
         
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> CategoryIndex()
         {
             CategoryVM categoryVM = new CategoryVM();
             categoryVM.Categories = _unitOfWork.Category.GetAll();
@@ -34,7 +34,7 @@ namespace Shopping.Areas.Admin.Controllers
        
         [HttpGet]
         
-        public IActionResult CreateUpdate(int? id)
+        public IActionResult CategoryCreateUpdate(int? id)
         {
             CategoryVM vm = new CategoryVM();
             if (id == null || id == 0)
@@ -87,7 +87,7 @@ namespace Shopping.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult CreateUpdate(CategoryVM vm)
+        public IActionResult CategoryCreateUpdate(CategoryVM vm)
         {
             if (ModelState.IsValid)
             {
@@ -103,13 +103,13 @@ namespace Shopping.Areas.Admin.Controllers
                     TempData["success"] = "Category Updated Done";
                 }
                 _unitOfWork.Save();
-                return RedirectToAction("Index");
+                return RedirectToAction("CategoryIndex");
 
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("CategoryIndex");
         }
         [HttpGet]
-        public IActionResult Delete(int? id)
+        public IActionResult CategoryDelete(int? id)
         {
             if (id == null || id == 0)
             {
@@ -122,9 +122,9 @@ namespace Shopping.Areas.Admin.Controllers
             }
             return View(category);
         }
-        [HttpPost, ActionName("Delete")]
+        [HttpPost, ActionName("CategoryDelete")]
         [ValidateAntiForgeryToken]
-        public IActionResult Delete(int id)
+        public IActionResult CategoryDelete(int id)
         {
             var category = _unitOfWork.Category.GetT(x => x.Id == id);
             if (category == null || id == 0)
@@ -134,7 +134,7 @@ namespace Shopping.Areas.Admin.Controllers
             _unitOfWork.Category.Delete(category);
             _unitOfWork.Save();
             TempData["success"] = "category Deleted Done";
-            return RedirectToAction("Index");
+            return RedirectToAction("CategoryIndex");
 
         }
     }

@@ -6,7 +6,7 @@ using Shopping.Repository.Interface;
 
 namespace Shopping.Repository.Class
 {
-    public class CartItemRepo : RepositoryRepo<CartItem>, ICartItems
+    public class CartItemRepo : RepositoryRepo<CartItemModel>, ICartItems
     {
         private readonly ApplicationDbContext _context;
         public CartItemRepo(ApplicationDbContext context) : base(context)
@@ -15,7 +15,7 @@ namespace Shopping.Repository.Class
 
         }
 
-        public void Update(CartItem cartItem)
+        public void Update(CartItemModel cartItem)
         {
             var cartItemDB = _context.CartItems.FirstOrDefault(x => x.Id == cartItem.Id);
             if (cartItemDB != null)
@@ -27,7 +27,7 @@ namespace Shopping.Repository.Class
             }
         }
 
-        List<CartItem> ICartItems.GetUserCartItems(string userId, string includeProperties)
+        List<CartItemModel> ICartItems.GetUserCartItems(string userId, string includeProperties)
         {
             return _context.CartItems
            .Where(cartItem => cartItem.Cart.UserId == userId)

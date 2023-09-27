@@ -45,10 +45,10 @@
                         <td>@item.CategoryId</td>
                         <td>
                             <div class="btn-group" role="group">
-                                <a asp-controller="Product" asp-action="CreateUpdate" asp-route-id="@item.Id" class="btn btn-primary">
+                                <a asp-controller="Product" asp-action="ProductCreateUpdate" asp-route-id="@item.Id" class="btn btn-primary">
                                     <i class="bi bi-pencil-square"></i> Edit
                                 </a>
-                                <a asp-controller="Product" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">
+                                <a asp-controller="Product" asp-action="ProductDelete" asp-route-id="@item.Id" class="btn btn-danger">
                                     <i class="bi bi-trash-fill"></i> Delete
                                 </a>
                             </div>
@@ -60,7 +60,7 @@
             <tr>
                 <td colspan="3">
                     <div class="col-10 text-end" align="center">
-                        <a asp-controller="Product" asp-action="CreateUpdate" class="btn btn-primary">
+                        <a asp-controller="Product" asp-action="ProductCreateUpdate" class="btn btn-primary">
                             Add Products
                             <i class="bi bi-plus-circle"></i>
                         </a>

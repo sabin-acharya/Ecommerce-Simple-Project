@@ -4,9 +4,9 @@ namespace Shopping.ViewModel
 {
     public class CategoryVM
     {
-        public Category Category { get; set; } = new Category();//single category
+        public CategoryModel Category { get; set; } = new CategoryModel();//single category
 
 
-        public IEnumerable<Category> Categories { get; set; } = new List<Category>(); //list of category
+        public IEnumerable<CategoryModel> Categories { get; set; } = new List<CategoryModel>(); //list of category
     }
 }

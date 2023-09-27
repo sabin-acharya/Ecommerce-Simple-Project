@@ -5,7 +5,7 @@ using Shopping.Repository.Interface;
 
 namespace Shopping.Repository.Class
 {
-    public class CategoryRepo : RepositoryRepo<Category>, ICategory
+    public class CategoryRepo : RepositoryRepo<CategoryModel>, ICategory
     {
         private readonly ApplicationDbContext _context;
         public CategoryRepo(ApplicationDbContext context) : base(context)
@@ -14,7 +14,7 @@ namespace Shopping.Repository.Class
 
         }
 
-        public void Update(Category category)
+        public void Update(CategoryModel category)
         {
             var categoryDB = _context.Categories.FirstOrDefault(x => x.Id == category.Id);
             if (categoryDB != null)

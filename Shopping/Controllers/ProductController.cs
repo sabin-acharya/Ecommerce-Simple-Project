@@ -24,7 +24,7 @@ namespace Shopping.Controllers
             var products = _unitOfWork.Product.GetAll(includeProperties: "Category");
             return Json(new { data = products });
         }
-        public IActionResult Index()
+        public IActionResult ProductIndex()
         {
             ProductVM productVM = new ProductVM();
             productVM.Products = _unitOfWork.Product.GetAll();
@@ -32,7 +32,7 @@ namespace Shopping.Controllers
         }
 
         [HttpGet]
-        public IActionResult CreateUpdate(int? id) 
+        public IActionResult ProductCreateUpdate(int? id) 
         {
             ProductVM vm = new ProductVM()
             {
@@ -66,7 +66,7 @@ namespace Shopping.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult CreateUpdate(ProductVM vm, IFormFile? file)
+        public IActionResult ProductCreateUpdate(ProductVM vm, IFormFile? file)
         {
             if(ModelState.IsValid)
             {
@@ -103,14 +103,14 @@ namespace Shopping.Controllers
                     TempData["success"] = "Product Update Done!";
                 }
                 _unitOfWork.Save();
-                return RedirectToAction("Index");
+                return RedirectToAction("ProductIndex");
 
             }
-            return RedirectToAction("Index"); 
+            return RedirectToAction("ProductIndex"); 
         }
 
         [HttpGet]
-        public IActionResult Delete(int? id)
+        public IActionResult ProductDelete(int? id)
         {
             if (id == null || id == 0)
             {
@@ -125,7 +125,7 @@ namespace Shopping.Controllers
         }
 
         [HttpPost]
-        public IActionResult Delete(int id)
+        public IActionResult ProductDelete(int id)
         {
             var product = _unitOfWork.Product.GetT(x => x.Id == id);
             if (product == null || id == 0)
@@ -135,7 +135,7 @@ namespace Shopping.Controllers
             _unitOfWork.Product.Delete(product);
             _unitOfWork.Save();
             TempData["success"] = "category Deleted Done";
-            return RedirectToAction("Index");
+            return RedirectToAction("ProductIndex");
             //var product = _unitOfWork.Product.GetT(x => x.Id == id);
             //if (product == null)
             //{

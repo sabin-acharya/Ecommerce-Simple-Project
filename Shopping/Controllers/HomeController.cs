@@ -20,14 +20,14 @@ namespace Shopping.Areas.Customer.Controllers
             _unitOfWork = unitOfWork;
         }
 
-        public IActionResult Index()
+        public IActionResult HomeIndex()
         {
             ProductVM productvm = new ProductVM();
             productvm.Products = _unitOfWork.Product.GetAll();
             return View(productvm);
         }
 
-        public IActionResult Privacy()
+        public IActionResult HomePrivacy()
         {
             return View();
         }

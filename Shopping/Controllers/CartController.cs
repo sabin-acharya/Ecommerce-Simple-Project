@@ -32,7 +32,7 @@ namespace Shopping.Controllers
 
         //}
        
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> CartIndex()
         {
             var ap = await _userManager.GetUserAsync(User);
           var  id= ap.Id;
@@ -41,7 +41,7 @@ namespace Shopping.Controllers
             
             if (ap != null)
             {
-                // Assuming that you have a method to retrieve cart items by UserId
+                // retrieve cart items by UserId
                 var cartItems = _unitOfWork.CartItems.GetUserCartItems(id, includeProperties:"Products");
                 
                 if (cartItems != null)
@@ -54,12 +54,12 @@ namespace Shopping.Controllers
                 }
             }
 
-            // Handle the case where the user is not authenticated or has no cart items
-            return RedirectToAction("AddCart");
+            
+            return RedirectToAction("CartAddCart");
         }
 
         [HttpGet]
-        public async Task<IActionResult> AddCart(int id)
+        public async Task<IActionResult> CartAddCart(int id)
         {
 
             CartViewModel cartvm = new CartViewModel();
@@ -75,76 +75,87 @@ namespace Shopping.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddCart(CartViewModel cvm, int id, int quantity)
+        public async Task<IActionResult> CartAddCart(CartViewModel cvm, int id, int quantity)
         {
             if (!User.Identity.IsAuthenticated)
             {
-
                 return RedirectToAction("Login");
             }
-            var ap = await _userManager.GetUserAsync(User);
+
+            var user = await _userManager.GetUserAsync(User);
             var product = _unitOfWork.Product.GetT(x => x.Id == id);
-            var cart = _unitOfWork.Carts.GetT(x => x.UserId == ap.Id);
+            var cart = _unitOfWork.Carts.GetT(x => x.UserId == user.Id);
+            //Checking if the userID exist or not
             if (cart == null)
             {
-                cart = new Cart
+                cart = new CartModel
                 {
-                    UserId = ap.Id
+                    UserId = user.Id
                 };
-                
                 _unitOfWork.Carts.Add(cart);
-                _unitOfWork.Save();
             }
-            var cartItem = new CartItem
+
+            // Check if the product already exists in the cart
+            var cartItem = _unitOfWork.CartItems.GetT(x => x.ProductId == id && x.CartId == cart.Id);
+
+            if (cartItem == null)
             {
-                ProductId = id,
-                
-                TotalPrice = (long)(quantity * product.Price),
-                CartId = cart.Id,
-                
-                Quantity = quantity,
+                // If the cart item doesn't exist, create a new one
+                cartItem = new CartItemModel
+                {
+                    ProductId = id,
+                    Quantity = quantity,
+                    CartId = cart.Id,
+                    TotalPrice = (long)(quantity * product.Price)
+                };
+                _unitOfWork.CartItems.Add(cartItem);
+            }
+            else
+            {
+                // If the cart item already exists,
+                cartItem.Quantity += quantity;
+                cartItem.TotalPrice = (long)(cartItem.Quantity * product.Price);
+            }
 
-
-            };
-
-            _unitOfWork.CartItems.Add(cartItem);
             _unitOfWork.Save();
 
-            Order order = new Order()
+            // Create an order for the cart item
+            OrderModel order = new OrderModel
             {
-               CartItemsId = cartItem.Id,
-               UserId = ap.Id
+                CartItemsId = cartItem.Id,
+                UserId = user.Id
             };
-            
 
             _unitOfWork.Order.Add(order);
             _unitOfWork.Save();
-            Buy buy = new Buy()
+
+            // Create a buy record for the order
+            BuyModel buy = new BuyModel
             {
                 OrderId = order.Id
-
             };
             _unitOfWork.Buys.Add(buy);
             _unitOfWork.Save();
 
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(CartIndex));
         }
-        // Added user Details to buy product
-        public IActionResult CartItemsWithUserDetails(CartViewModel cvm)
-        {
-            if(cvm != null)
-            {
-                _unitOfWork.CartItems.Add(cvm.CartItem);
-                _unitOfWork.Save();
 
-            }
-            return RedirectToAction("Index");
-        }
+        // Added user Details to buy product
+        //public IActionResult CartItemsWithUserDetails(CartViewModel cvm)
+        //{
+        //    if(cvm != null)
+        //    {
+        //        _unitOfWork.CartItems.Add(cvm.CartItem);
+        //        _unitOfWork.Save();
+
+        //    }
+        //    return RedirectToAction("CartIndex");
+        //}
 
 
 
         [HttpGet]
-        public IActionResult Remove(int? id)
+        public IActionResult CartRemove(int? id)
         {
             if (id == null || id == 0)
             {
@@ -160,7 +171,7 @@ namespace Shopping.Controllers
 
 
         [HttpPost]
-        public IActionResult Removepo(int id)
+        public IActionResult CartRemove(int id)
         {
             var cart = _unitOfWork.CartItems.GetT(x => x.Id == id);
             if (cart == null || id == 0)
@@ -170,7 +181,7 @@ namespace Shopping.Controllers
             _unitOfWork.CartItems.Delete(cart);
             _unitOfWork.Save();
             TempData["success"] = "Deleted Done";
-            return RedirectToAction("Index");
+            return RedirectToAction("CartIndex");
         }
         
         //public IActionResult Buy(int id)

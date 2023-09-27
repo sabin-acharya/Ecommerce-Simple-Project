@@ -2,7 +2,7 @@
 
 namespace Shopping.Models
 {
-    public class Buy
+    public class BuyModel
     {
         public int Id { get; set; }
         public string? CustomerName { get; set; }
@@ -13,6 +13,6 @@ namespace Shopping.Models
        
         public int OrderId { get; set; }
         [ForeignKey("OrderId")]
-        public Order? Order { get; set; }
+        public OrderModel? Order { get; set; }
     }
 }

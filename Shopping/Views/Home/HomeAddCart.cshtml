@@ -45,12 +45,12 @@
                 </div>
             </div>
 
-            <form asp-action="AddCart" asp-controller="Home" method="post">
+            <form asp-action="CartAddCart" asp-controller="Home" method="post">
                 <input type="hidden" asp-for="CartItem.Id" />
                 <button type="submit" class="btn btn-primary">Add to Cart</button>
             </form>
 
-            <a asp-action="Index" class="btn btn-secondary">Back to Product List</a>
+            <a asp-action="CartIndex" class="btn btn-secondary">Back to Product List</a>
         </div>
     </div>
 </div>

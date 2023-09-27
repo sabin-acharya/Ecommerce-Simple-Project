@@ -17,15 +17,15 @@ namespace Shopping.Controllers
             _unitofwork = unitofwork;
         }
 
-        public IActionResult Index()
+        public IActionResult BuyIndex()
         {
             return View();
         }
 
         [HttpGet]
-        public IActionResult SaveOrder(int? id)
+        public IActionResult BuySaveOrder(int? id)
         {
-            CartItem ci = new CartItem();
+            CartItemModel ci = new CartItemModel();
             id = ci.Id;
             BuyVM vm = new BuyVM();
             ViewBag.CartItemId = id;
@@ -37,7 +37,7 @@ namespace Shopping.Controllers
             
         }
         [HttpPost]
-        public IActionResult SaveOrder(BuyVM buyvm)
+        public IActionResult BuySaveOrder(BuyVM buyvm)
         {
             //if (ModelState.IsValid && buyvm != null && buyvm.Buy != null)
             //{
@@ -68,13 +68,13 @@ namespace Shopping.Controllers
             //        _unitofwork.Save();
             //    }
             //}
-            Order order = new Order();
+            OrderModel order = new OrderModel();
            // order = _unitofwork.Order.GetAll();
             
 
             _unitofwork.Buys.Add(buyvm.Buy);
             _unitofwork.Save();
-            return RedirectToAction("Index");
+            return RedirectToAction("BuyIndex");
         }
             //{
             //    int id = buyvm.Buy.Id;

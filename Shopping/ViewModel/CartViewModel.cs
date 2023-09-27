@@ -4,9 +4,9 @@ namespace Shopping.ViewModel
 {
     public class CartViewModel
     {
-        public CartItem CartItem { get; set; } = new CartItem();
+        public CartItemModel CartItem { get; set; } = new CartItemModel();
 
 
-        public IEnumerable<CartItem> CartItems { get; set; } = new List<CartItem>();
+        public IEnumerable<CartItemModel> CartItems { get; set; } = new List<CartItemModel>();
     }
 }

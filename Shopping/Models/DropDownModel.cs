@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Shopping.Models
 {
-    public class DropDown
+    public class DropDownModel
     {
         
         

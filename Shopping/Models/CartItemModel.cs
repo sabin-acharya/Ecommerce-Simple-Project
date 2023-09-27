@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Shopping.Models
 {
-    public class CartItem
+    public class CartItemModel
     {
         
          public int Id { get; set; }
@@ -18,7 +18,7 @@ namespace Shopping.Models
 
         //public string? CardNumber { get; set; }
         [Required]
-        public Product? Product {  get; set; }
+        public ProductModel? Product {  get; set; }
 
         [Required]
       
@@ -28,7 +28,7 @@ namespace Shopping.Models
 
         public int CartId { get; set; }
         [ForeignKey("CartId")]
-        public Cart? Cart { get; set; }
+        public CartModel? Cart { get; set; }
 
 
 

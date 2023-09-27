@@ -27,7 +27,7 @@
                 <div class="logo">
                    
                 </div>
-                <a class="navbar-brand text-dark" asp-area="" asp-controller="Home" asp-action="Index"><img src="https://dmnwebapi.dishhome.com.np/v1/file/image-16607301825045493.png" alt="RedStore" width="125px" </a>
+                <a class="navbar-brand text-dark" asp-area="" asp-controller="Home" asp-action="HomeIndex"><img src="https://dmnwebapi.dishhome.com.np/v1/file/image-16607301825045493.png" alt="RedStore" width="125px" </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -35,16 +35,16 @@
                 <div class="collapse navbar-collapse" id="navbarColor01">
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="HomeIndex">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Cart" asp-action="Index">CartItems</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Cart" asp-action="CartIndex">CartItems</a>
                         </li>
                         <li class="nav-item dropdown text-dark">
                             <a class="nav-link text-dark dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Add Products</a>
                             <div class="dropdown-menu">
-                                <a class="nav-link text-white" asp-area="" asp-controller="Product" asp-action="Index">Product</a>
-                                <a class="nav-link text-white" asp-area="" asp-controller="Category" asp-action="Index">Category</a>
+                                <a class="nav-link text-white" asp-area="" asp-controller="Product" asp-action="ProductIndex">Product</a>
+                                <a class="nav-link text-white" asp-area="" asp-controller="Category" asp-action="CategoryIndex">Category</a>
                                 <div class="dropdown-divider"></div>
                             </div>
                         </li>
@@ -68,8 +68,13 @@
                     <h3>Download Our App</h3>
                     <p>Download App for Android and iso mobile phone.</p>
                     <div class="app-logo">
-                        <img src="https://i.ibb.co/KbPTYYQ/play-store.png" alt="" />
-                        <img src="https://i.ibb.co/hVM4X2p/app-store.png" alt="" />
+                        <a href="https://play.google.com/store/apps/details?id=com.shirantech.dishhome&pli=1" target="_blank" rel="noopener noreferrer">
+                            <img src="https://i.ibb.co/KbPTYYQ/play-store.png" alt="Link to Play Store" />
+                        </a>
+                        <a href="https://apps.apple.com/np/app/dish-home-nepal/id1396471022" target="_blank" rel="noopener noreferrer">
+                            <img src="https://i.ibb.co/hVM4X2p/app-store.png" alt="Link to Play Store" />
+                        </a>
+                        
                     </div>
                 </div>
                 <div class="footer-col-2">

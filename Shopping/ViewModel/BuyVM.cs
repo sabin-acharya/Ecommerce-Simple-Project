@@ -5,10 +5,10 @@ namespace Shopping.ViewModel
 {
     public class BuyVM
     {
-        public Buy Buy { get; set; } = new Buy();
+        public BuyModel Buy { get; set; } = new BuyModel();
 
 
-        public IEnumerable<Buy> Buys { get; set; } = new List<Buy>();
+        public IEnumerable<BuyModel> Buys { get; set; } = new List<BuyModel>();
 
 
     }

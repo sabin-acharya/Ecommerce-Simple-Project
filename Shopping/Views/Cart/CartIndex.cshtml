@@ -1,6 +1,6 @@
 ﻿@model Shopping.ViewModel.CartViewModel
 <div class="container">
-    <a  asp-controller="Buy" asp-action="SaveOrder" >
+    <Form asp-controller="Buy" asp-action="BuySaveOrder">
         <input type="hidden" asp-for="CartItem.Id" />
         <input type="hidden" />
         <!-- Row 2: Shopping Cart -->
@@ -43,11 +43,14 @@
                                             }
                                         </div>
                                     </td>
-                                    <td>@cartitem.Quantity</td>
+                                    <td class="quantity">
+                                        <span>@cartitem.Quantity</span>
+                                        
+                                    </td>
                                     <td>@cartitem.Product?.Price.ToString("C")</td>
                                     <td>@(cartitem.Quantity * (cartitem.Product?.Price ?? 0))$</td>
                                     <td>
-                                        <a asp-controller="Cart" asp-action="Remove" asp-route-id="@cartitem.Id" class="btn btn-danger">
+                                        <a asp-controller="Cart" asp-action="CartRemove" asp-route-id="@cartitem.Id" class="btn btn-danger">
                                             <i class="bi bi-trash-fill"></i> Remove
                                         </a>
                                     </td>
@@ -59,7 +62,7 @@
                                 <td colspan="3"><strong>Total:</strong></td>
                                 <td>@Model.CartItems.Sum(item => item.Quantity * (item.Product?.Price ?? 0)).ToString("C")</td>
                                 <td>
-                                        <button class="btn btn-primary">Place Your Location</button>
+                                    <button class="btn btn-primary" id="placeOrder">Place Your Location</button>
                                 </td>
                             </tr>
                         </tfoot>
@@ -67,5 +70,28 @@
                 }
             </div>
         </div>
-    </a>
+    </Form>
 </div>
+
+<script>
+    // JavaScript code to handle quantity increment and decrement
+    const quantityElements = document.querySelectorAll('.quantity');
+
+    quantityElements.forEach((element) => {
+        const incrementElement = element.querySelector('.quantity-increase');
+        const decrementElement = element.querySelector('.quantity-decrease');
+        const quantitySpan = element.querySelector('span');
+
+        incrementElement.addEventListener('click', () => {
+            const currentQuantity = parseInt(quantitySpan.innerText);
+            quantitySpan.innerText = currentQuantity + 1;
+        });
+
+        decrementElement.addEventListener('click', () => {
+            const currentQuantity = parseInt(quantitySpan.innerText);
+            if (currentQuantity > 1) {
+                quantitySpan.innerText = currentQuantity - 1;
+            }
+        });
+    });
+</script>

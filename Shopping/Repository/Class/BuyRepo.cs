@@ -5,7 +5,7 @@ using Shopping.Repository.Interface;
 
 namespace Shopping.Repository.Class
 {
-    public class BuyRepo : RepositoryRepo<Buy>, IBuy
+    public class BuyRepo : RepositoryRepo<BuyModel>, IBuy
     {
         private readonly ApplicationDbContext _context;
         public BuyRepo(ApplicationDbContext context) : base(context)
@@ -14,7 +14,7 @@ namespace Shopping.Repository.Class
 
         }
 
-        public void Update(Buy buy)
+        public void Update(BuyModel buy)
         {
             
                 var buyDB = _context.Buys.FirstOrDefault(x => x.Id == buy.Id);
@@ -27,7 +27,7 @@ namespace Shopping.Repository.Class
                 }
             
         }
-        List<Buy> IBuy.GetBuy(int Id, string includeProperties)
+        List<BuyModel> IBuy.GetBuy(int Id, string includeProperties)
         {
             return _context.Buys
            .Where(buy => buy.OrderId == Id)

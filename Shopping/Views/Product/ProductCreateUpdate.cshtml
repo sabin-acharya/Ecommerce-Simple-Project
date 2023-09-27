@@ -4,7 +4,7 @@
 }
 
 <div class="container mt-5">
-    <form  asp-action="CreateUpdate" method="post" enctype="multipart/form-data">
+    <form  asp-action="ProductCreateUpdate" method="post" enctype="multipart/form-data">
         <input type="hidden" asp-for="Product.Id" />
         <input type="hidden" asp-for="Product.ImageUrl"/>
         
@@ -74,7 +74,7 @@
                             <button type="submit" class="btn btn-primary btn-lg">Update</button>
                         }
 
-                        <a asp-controller="Product" asp-action="Index" class="btn btn-secondary btn-lg ml-2">
+                        <a asp-controller="Product" asp-action="ProductIndex" class="btn btn-secondary btn-lg ml-2">
                             Back to List
                         </a>
                     </div>

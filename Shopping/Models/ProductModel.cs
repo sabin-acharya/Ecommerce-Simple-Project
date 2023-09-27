@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Shopping.Models
 {
-    public class Product
+    public class ProductModel
     {
         public int Id { get; set; }
         public string? Name { get; set; }
@@ -15,7 +15,7 @@ namespace Shopping.Models
         public double Price { get; set; }
         public int CategoryId { get; set; }
         [ValidateNever]
-        public Category? Category { get; set; }
+        public CategoryModel? Category { get; set; }
 
         //public int CartItemId { get; set; }
         //public CartItem? CartItem { get; set; }

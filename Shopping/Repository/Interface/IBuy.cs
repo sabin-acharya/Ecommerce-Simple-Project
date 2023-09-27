@@ -2,9 +2,9 @@
 
 namespace Shopping.Repository.Interface
 {
-    public interface IBuy : IRepository<Buy>
+    public interface IBuy : IRepository<BuyModel>
     {
-        void Update(Buy buy);
-        List<Buy> GetBuy(int Id, string includeProperties);
+        void Update(BuyModel buy);
+        List<BuyModel> GetBuy(int Id, string includeProperties);
     }
 }

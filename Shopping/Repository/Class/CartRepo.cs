@@ -5,7 +5,7 @@ using Shopping.Repository.Interface;
 
 namespace Shopping.Repository.Class
 {
-    public class CartRepo : RepositoryRepo<Cart>, ICart
+    public class CartRepo : RepositoryRepo<CartModel>, ICart
     {
         private readonly ApplicationDbContext _context;
         public CartRepo(ApplicationDbContext context) : base(context)
@@ -15,7 +15,7 @@ namespace Shopping.Repository.Class
         }
 
         
-       public void AddUpdate(Cart cart)
+       public void AddUpdate(CartModel cart)
         {
             if(cart != null)
             {

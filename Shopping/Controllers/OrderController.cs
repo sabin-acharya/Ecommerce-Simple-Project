@@ -13,7 +13,7 @@ namespace Shopping.Controllers
             _unitofwork = unitofwork;
         }
 
-        public IActionResult Index(int? id)
+        public IActionResult OrderIndex(int? id)
         {
 
 
@@ -25,7 +25,7 @@ namespace Shopping.Controllers
         }
 
         [HttpGet]
-        public IActionResult SaveOrder(int? id) 
+        public IActionResult OrderSaveOrder(int? id) 
         {
             OrderVM vm = new OrderVM();
            
@@ -48,7 +48,7 @@ namespace Shopping.Controllers
         }
 
         [HttpPost]
-        public IActionResult SaveOrder(OrderVM orderVM, int id)
+        public IActionResult OrderSaveOrder(OrderVM orderVM, int id)
         {
             if(ModelState.IsValid)
             {
@@ -64,9 +64,9 @@ namespace Shopping.Controllers
 
               
                 _unitofwork.Save();
-                return RedirectToAction("Index");
+                return RedirectToAction("OrderIndex");
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("OrderIndex");
         }
     }
 }
