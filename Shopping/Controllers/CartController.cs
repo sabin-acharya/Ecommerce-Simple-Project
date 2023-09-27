@@ -11,6 +11,7 @@ using Shopping.Data.Migrations;
 namespace Shopping.Controllers
 {
     [Authorize]
+   
     public class CartController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -74,19 +75,16 @@ namespace Shopping.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddCart(int id, int quantity)
+        public async Task<IActionResult> AddCart(CartViewModel cvm, int id, int quantity)
         {
             if (!User.Identity.IsAuthenticated)
             {
 
                 return RedirectToAction("Login");
             }
-
             var ap = await _userManager.GetUserAsync(User);
             var product = _unitOfWork.Product.GetT(x => x.Id == id);
-
             var cart = _unitOfWork.Carts.GetT(x => x.UserId == ap.Id);
-
             if (cart == null)
             {
                 cart = new Cart
@@ -97,7 +95,6 @@ namespace Shopping.Controllers
                 _unitOfWork.Carts.Add(cart);
                 _unitOfWork.Save();
             }
-
             var cartItem = new CartItem
             {
                 ProductId = id,
@@ -112,9 +109,38 @@ namespace Shopping.Controllers
 
             _unitOfWork.CartItems.Add(cartItem);
             _unitOfWork.Save();
+
+            Order order = new Order()
+            {
+               CartItemsId = cartItem.Id,
+               UserId = ap.Id
+            };
             
+
+            _unitOfWork.Order.Add(order);
+            _unitOfWork.Save();
+            Buy buy = new Buy()
+            {
+                OrderId = order.Id
+
+            };
+            _unitOfWork.Buys.Add(buy);
+            _unitOfWork.Save();
+
             return RedirectToAction(nameof(Index));
         }
+        // Added user Details to buy product
+        public IActionResult CartItemsWithUserDetails(CartViewModel cvm)
+        {
+            if(cvm != null)
+            {
+                _unitOfWork.CartItems.Add(cvm.CartItem);
+                _unitOfWork.Save();
+
+            }
+            return RedirectToAction("Index");
+        }
+
 
 
         [HttpGet]
@@ -145,10 +171,8 @@ namespace Shopping.Controllers
             _unitOfWork.Save();
             TempData["success"] = "Deleted Done";
             return RedirectToAction("Index");
-
         }
         
-
         //public IActionResult Buy(int id)
         //{
 

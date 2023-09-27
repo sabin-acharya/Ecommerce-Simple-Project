@@ -30,7 +30,7 @@ namespace Shopping.Repository.Class
         List<Buy> IBuy.GetBuy(int Id, string includeProperties)
         {
             return _context.Buys
-           .Where(buy => buy.CartItemId == Id)
+           .Where(buy => buy.OrderId == Id)
            .ToList();
         }
     }

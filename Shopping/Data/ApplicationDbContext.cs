@@ -30,11 +30,7 @@ namespace Shopping.Data
                 seedRoles(Builder);
             }
 
-            //modelBuilder.Entity<CartItem>()
-            //    .HasOne(ct => ct.Cart)
-            //    .WithOne()
-            //    .HasForeignKey<CartItem>(ct => ct.CartId)
-            //    .HasPrincipalKey<Cart>(cart => cart.Id);
+            
         }
 
         // Assigining the roles

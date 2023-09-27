@@ -166,7 +166,8 @@ namespace Shopping.Areas.Identity.Pages.Account
 
                     if (result.Succeeded)
                     {
-                        // Set EmailConfirmed to true to confirm the user's email
+                        // Set EmailConfirmed to true to confirm the user's email when user click on the register button without sending any conformation email
+                        // 
                         user.EmailConfirmed = true;
                         await _userManager.UpdateAsync(user);
 

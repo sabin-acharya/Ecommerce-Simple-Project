@@ -7,6 +7,7 @@ using Shopping.ViewModel;
 namespace Shopping.Controllers
 {
     [Authorize(Roles = "Admin")]
+    
     public class ProductController : Controller
     {
 

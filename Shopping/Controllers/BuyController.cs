@@ -6,9 +6,12 @@ using Shopping.ViewModel;
 
 namespace Shopping.Controllers
 {
+    
     public class BuyController : Controller
     {
         private readonly IUnitOfWork _unitofwork;
+        
+
         public BuyController(IUnitOfWork unitofwork)
         {
             _unitofwork = unitofwork;
@@ -22,29 +25,19 @@ namespace Shopping.Controllers
         [HttpGet]
         public IActionResult SaveOrder(int? id)
         {
-           
+            CartItem ci = new CartItem();
+            id = ci.Id;
             BuyVM vm = new BuyVM();
             ViewBag.CartItemId = id;
-            if (id != null || id != 0)
+            if (id != null )
             {
                 return View(vm);
             }
             return View();
-            //else
-            //{
-            //    vm.Buy = _unitofwork.Buys.GetT(x => x.Id == id);
-            //    if (vm.Buy == null)
-            //    {
-            //        return NotFound();
-            //    }
-            //    else
-            //    {
-            //        return View(vm);
-            //    }
-            //}
+            
         }
         [HttpPost]
-        public IActionResult SaveOrder([FromBody]BuyVM buyvm, int Id)
+        public IActionResult SaveOrder(BuyVM buyvm)
         {
             //if (ModelState.IsValid && buyvm != null && buyvm.Buy != null)
             //{
@@ -63,18 +56,21 @@ namespace Shopping.Controllers
             //    return RedirectToAction("Index");
 
             //}
-            Id = buyvm.Buy.CartItemId;
-            if(Id == 0) 
-            { 
-                CartViewModel cvm = new CartViewModel();
-                cvm.CartItems = _unitofwork.CartItems.GetAll();
-                foreach (var cartItem in cvm.CartItems)
-                {
-                     Id = cartItem.Id;
+            //Id = buyvm.Buy.OrderId;
+            //if(Id == 0) 
+            //{ 
+            //    CartViewModel cvm = new CartViewModel();
+            //    cvm.CartItems = _unitofwork.CartItems.GetAll();
+            //    foreach (var cartItem in cvm.CartItems)
+            //    {
+            //         Id = cartItem.Id;
                     
-                    _unitofwork.Save();
-                }
-            }
+            //        _unitofwork.Save();
+            //    }
+            //}
+            Order order = new Order();
+           // order = _unitofwork.Order.GetAll();
+            
 
             _unitofwork.Buys.Add(buyvm.Buy);
             _unitofwork.Save();

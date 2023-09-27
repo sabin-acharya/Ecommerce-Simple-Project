@@ -9,6 +9,7 @@ using CategoryVM = Shopping.ViewModel.CategoryVM;
 namespace Shopping.Areas.Admin.Controllers
 {
     [Authorize(Roles = "Admin")]
+    
     public class CategoryController : Controller
     {
         private readonly ApplicationDbContext _context;
