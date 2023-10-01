@@ -3,7 +3,7 @@ using Shopping.Repository.Class;
 
 namespace Shopping.Repository.Interface
 {
-    public interface ICartItems : IRepository<CartItemModel>
+    public interface ICartItemsRepo : IRepositoryRepo<CartItemModel>
     {
         void Update(CartItemModel cartItem);
         

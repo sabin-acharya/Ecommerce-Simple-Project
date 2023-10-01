@@ -1,7 +1,8 @@
 ﻿@model Shopping.ViewModel.CartViewModel
 <div class="container">
-    <Form asp-controller="Buy" asp-action="BuySaveOrder">
-        <input type="hidden" asp-for="CartItem.Id" />
+    <a asp-controller="Location" asp-action="LocationSaveOrder" asp-route-id="@Model.CartItem.Id">
+        <input type="hidden" asp-for="CartItem.Id " />
+   
         <input type="hidden" />
         <!-- Row 2: Shopping Cart -->
         <div class="row mt-4">
@@ -70,7 +71,7 @@
                 }
             </div>
         </div>
-    </Form>
+    </a>
 </div>
 
 <script>

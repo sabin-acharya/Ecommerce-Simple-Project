@@ -11,9 +11,9 @@ namespace Shopping.Controllers
     public class ProductController : Controller
     {
 
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IUnitOfWorkRepo _unitOfWork;
         private readonly IWebHostEnvironment _webHostEnvironment;
-        public ProductController(IUnitOfWork unitOfWork, IWebHostEnvironment webHostEnvironment)
+        public ProductController(IUnitOfWorkRepo unitOfWork, IWebHostEnvironment webHostEnvironment)
         {
             _unitOfWork = unitOfWork;
             _webHostEnvironment = webHostEnvironment;

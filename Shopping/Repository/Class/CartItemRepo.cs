@@ -6,7 +6,7 @@ using Shopping.Repository.Interface;
 
 namespace Shopping.Repository.Class
 {
-    public class CartItemRepo : RepositoryRepo<CartItemModel>, ICartItems
+    public class CartItemRepo : RepositoryRepo<CartItemModel>, ICartItemsRepo
     {
         private readonly ApplicationDbContext _context;
         public CartItemRepo(ApplicationDbContext context) : base(context)
@@ -27,7 +27,7 @@ namespace Shopping.Repository.Class
             }
         }
 
-        List<CartItemModel> ICartItems.GetUserCartItems(string userId, string includeProperties)
+        List<CartItemModel> ICartItemsRepo.GetUserCartItems(string userId, string includeProperties)
         {
             return _context.CartItems
            .Where(cartItem => cartItem.Cart.UserId == userId)

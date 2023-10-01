@@ -38,7 +38,7 @@ namespace Shopping.Areas.Identity.Pages.Account
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
             IUserStore<ApplicationUser> userStore,
-            SignInManager<ApplicationUser> signInManager, 
+            SignInManager<ApplicationUser> signInManager,
             RoleManager<IdentityRole> roleManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender)
@@ -113,10 +113,10 @@ namespace Shopping.Areas.Identity.Pages.Account
 
 
             //Add role 
-            
+
             [Required]
             [Display(Name = "Role")]
-            public string Role {  get; set; }
+            public string Role { get; set; }
 
             [Required]
             [ValidateNever]

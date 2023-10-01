@@ -4,57 +4,73 @@
     ViewData["Title"] = "AddCart";
 }
 
-<h1 align="Center">Add to Cart</h1>
+<h1 align="center">Add to Cart</h1>
 
-<div>
-    
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.CartItem.Product.Name)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.CartItem.Product.Name)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.CartItem.Product.Description)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.CartItem.Product.Description)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.CartItem.Product.Price)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.CartItem.Product.Price)
-        </dd>
-
-        @* <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.CartItem.Product.Image)
-        </dt> *@
-        <dd class="col-sm-10">
+<div class="container">
+    <hr height="100"/>
+    <div class="row">
+        <!-- First Row -->
+        <div class="col-md-6">
+            <dl class="row">
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.CartItem.Product.Name)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.CartItem.Product.Name)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.CartItem.Product.Description)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.CartItem.Product.Description)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.CartItem.Product.Price)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.CartItem.Product.Price)
+                </dd>
+            </dl>
+        </div>
+        <div class="col-md-6">
+            <!-- Place the image here -->
             <img src="@Model.CartItem.Product.ImageUrl" alt="@Model.CartItem.Product.Name" class="img-thumbnail" />
-        </dd>
-    </dl>
-
-    <form asp-action="CartAddCart" asp-controller="Cart" method="post">
-        <input type="hidden" asp-for="CartItem.Id" />
-
-        <div class="form-group">
-            <label for="quantity">Quantity:</label>
-            <input type="number" id="quantity" name="quantity" class="form-control" value="1" min="1" />
         </div>
+    </div>
 
-        <div class="form-group">
-            <label for="totalPrice">Total Price:</label>
-            <input type="text" id="totalPrice" name="totalPrice" class="form-control" readonly />
-        </div>
+    <!-- Second Row -->
+    <div class="row mt-3">
+        
+         <div class="col-md-6">
+                  <form asp-action="CartAddCart" asp-controller="Cart" method="post">
+           
+                        <input type="hidden" asp-for="CartItem.Id" />
+                        <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="quantity">Quantity:</label>
+                            <input type="number" id="quantity" name="quantity" class="form-control" value="1" min="1" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="totalPrice">Total Price:</label>
+                            <input type="text" id="totalPrice" name="totalPrice" class="form-control" readonly />
+                        </div>
+                    </div>
+                
+                <!-- Merge the last two rows -->
+                <div class="row mt-3">
+                    <div class="col-md-12">
+                        <!-- Move the "Add to Cart" button outside of the loop -->
+                        <button type="submit" class="btn btn-primary">Add to Cart</button>
+                    </div>
+                </div>
+            </form>
+         </div>
+         
+</div>
 
-        <!-- Move the "Buy" button outside of the loop -->
-        <button type="submit"  class="btn btn-primary">Add to Cart</button>
-    </form>
-
-    <a asp-controller="Home" asp-action="HomeIndex" class="btn btn-secondary">Back to Product List</a>
+<a asp-controller="Home" asp-action="HomeIndex" class="btn btn-secondary mt-3">Back to Product List</a>
 </div>
 
 <script>

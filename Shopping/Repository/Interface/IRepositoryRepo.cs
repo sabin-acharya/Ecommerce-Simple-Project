@@ -3,7 +3,7 @@
 namespace Shopping.Repository.Interface
 {
 
-    public interface IRepository<T> where T : class
+    public interface IRepositoryRepo<T> where T : class
     {
         IEnumerable<T> GetAll(Expression<Func<T, bool>>? predicate = null, string? includeProperties = null);
         T GetT(Expression<Func<T, bool>>? predicate, string? includeProperties = null);

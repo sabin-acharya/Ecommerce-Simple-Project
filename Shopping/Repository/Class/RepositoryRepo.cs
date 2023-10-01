@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace Shopping.Repository.Class
 {
-    public class RepositoryRepo<T> : IRepository<T> where T : class
+    public class RepositoryRepo<T> : IRepositoryRepo<T> where T : class
     {
         private readonly ApplicationDbContext _context;
         private readonly DbSet<T> _dbSet;

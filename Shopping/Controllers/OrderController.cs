@@ -7,8 +7,8 @@ namespace Shopping.Controllers
     public class OrderController : Controller
     {
 
-        private readonly IUnitOfWork _unitofwork;
-        public OrderController(IUnitOfWork unitofwork)
+        private readonly IUnitOfWorkRepo _unitofwork;
+        public OrderController(IUnitOfWorkRepo unitofwork)
         {
             _unitofwork = unitofwork;
         }

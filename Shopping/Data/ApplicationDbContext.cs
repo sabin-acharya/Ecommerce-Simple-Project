@@ -21,7 +21,11 @@ namespace Shopping.Data
         public DbSet<CartModel> Carts { get; set; }
 
         public DbSet<OrderModel> Orders { get; set; }
-        public DbSet<BuyModel> Buys { get; set; }
+        public DbSet<LocationModel> Buys { get; set; }
+
+        public DbSet<BuyCartIdModel> BuyCartIdModels { get; set; }
+
+        
         protected override void OnModelCreating(ModelBuilder Builder)
         {
             base.OnModelCreating(Builder);

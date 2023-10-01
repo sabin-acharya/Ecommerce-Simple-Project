@@ -2,7 +2,7 @@
 
 namespace Shopping.Repository.Interface
 {
-    public interface IProduct : IRepository<ProductModel>
+    public interface IProductRepo : IRepositoryRepo<ProductModel>
 
     {
         void Update(ProductModel product);

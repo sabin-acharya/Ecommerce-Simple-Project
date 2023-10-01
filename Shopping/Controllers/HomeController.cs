@@ -12,9 +12,9 @@ namespace Shopping.Areas.Customer.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IUnitOfWorkRepo _unitOfWork;
 
-        public HomeController(ILogger<HomeController> logger, IUnitOfWork unitOfWork)
+        public HomeController(ILogger<HomeController> logger, IUnitOfWorkRepo unitOfWork)
         {
             _logger = logger;
             _unitOfWork = unitOfWork;

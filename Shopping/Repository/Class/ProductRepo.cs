@@ -5,7 +5,7 @@ using Shopping.Repository.Interface;
 namespace Shopping.Repository.Class
 {
 
-    public class ProductRepo : RepositoryRepo<ProductModel>, IProduct
+    public class ProductRepo : RepositoryRepo<ProductModel>, IProductRepo
     {
         private readonly ApplicationDbContext _context;
         public ProductRepo(ApplicationDbContext context) : base(context)

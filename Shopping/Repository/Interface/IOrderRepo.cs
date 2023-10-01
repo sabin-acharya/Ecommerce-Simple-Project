@@ -2,7 +2,7 @@
 
 namespace Shopping.Repository.Interface
 {
-    public interface IOrder : IRepository<OrderModel>
+    public interface IOrderRepo : IRepositoryRepo<OrderModel>
     {
         void Update(OrderModel order);
         void AddCartItemId(CartItemModel cartItem);

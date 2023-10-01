@@ -1,23 +1,27 @@
 ﻿using Shopping.Data;
 using Shopping.Data.Migrations;
 using Shopping.Repository.Interface;
+using Shopping.Services;
 
 namespace Shopping.Repository.Class
 {
-    public class UnitOfWorkRepo : IUnitOfWork
+    public class UnitOfWorkRepo : IUnitOfWorkRepo
     {
         private readonly ApplicationDbContext _context;
-        public ICategory Category { get; private set; }
+        public ICategoryRepo Category { get; private set; }
 
-        public IProduct Product { get; private set; }
+        public IProductRepo Product { get; private set; }
 
-        public ICart Carts { get; private set; }
+        public ICartRepo Carts { get; private set; }
 
-        public IBuy Buys { get; private set; }
+        public ILocationRepo Locations { get; private set; }
 
+        public IEmailServicesRepo EmailServices { get; private set; }
         
-        public IOrder Order { get; private set; }
-        public ICartItems CartItems {  get; private set; }
+        public IOrderRepo Order { get; private set; }
+        public ICartItemsRepo CartItems {  get; private set; }
+
+        public IBuyCartIdRepo BuyCartId { get; private set; }
 
 
         public UnitOfWorkRepo(ApplicationDbContext context)
@@ -27,9 +31,10 @@ namespace Shopping.Repository.Class
             Product = new ProductRepo(context);
             CartItems = new CartItemRepo(context);
             Carts = new CartRepo(context);
-            Buys = new BuyRepo(context);
+            Locations = new LocationRepo(context);
             Order = new OrderRepo(context);
-            
+            EmailServices = new EmailServicesRepo(context);
+            BuyCartId = new BuyCartIdRepo(context);
             
         }
 

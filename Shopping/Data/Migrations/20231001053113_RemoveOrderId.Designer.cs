@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Shopping.Data;
 
@@ -11,9 +12,10 @@ using Shopping.Data;
 namespace Shopping.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231001053113_RemoveOrderId")]
+    partial class RemoveOrderId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,14 +53,14 @@ namespace Shopping.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "572f5dd5-d8b9-435b-b6f7-cdd4bde1d631",
+                            Id = "eeceb1d1-a899-49f5-9271-6f1d6a87989d",
                             ConcurrencyStamp = "1",
                             Name = "Admin",
                             NormalizedName = "Admin"
                         },
                         new
                         {
-                            Id = "ae7b34db-0d72-40af-a478-189f3001a354",
+                            Id = "8bc378c6-83bd-4a72-98d2-dbff1451ac91",
                             ConcurrencyStamp = "2",
                             Name = "Customer",
                             NormalizedName = "Customer"
@@ -247,29 +249,6 @@ namespace Shopping.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
-                });
-
-            modelBuilder.Entity("Shopping.Models.BuyCartIdModel", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("CartItemId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("LocationId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CartItemId");
-
-                    b.HasIndex("LocationId");
-
-                    b.ToTable("BuyCartIdModels");
                 });
 
             modelBuilder.Entity("Shopping.Models.CartItemModel", b =>
@@ -464,25 +443,6 @@ namespace Shopping.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Shopping.Models.BuyCartIdModel", b =>
-                {
-                    b.HasOne("Shopping.Models.CartItemModel", "CartItemModel")
-                        .WithMany()
-                        .HasForeignKey("CartItemId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Shopping.Models.LocationModel", "LocationModel")
-                        .WithMany()
-                        .HasForeignKey("LocationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("CartItemModel");
-
-                    b.Navigation("LocationModel");
                 });
 
             modelBuilder.Entity("Shopping.Models.CartItemModel", b =>

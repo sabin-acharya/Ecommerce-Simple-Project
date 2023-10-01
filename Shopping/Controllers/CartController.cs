@@ -15,11 +15,11 @@ namespace Shopping.Controllers
     public class CartController : Controller
     {
         private readonly ApplicationDbContext _context;
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IUnitOfWorkRepo _unitOfWork;
         private readonly UserManager<Data.ApplicationUser> _userManager;
         private string id;
 
-        public CartController(ApplicationDbContext context, IUnitOfWork unitOfWork, UserManager<Data.ApplicationUser> userManager)
+        public CartController(ApplicationDbContext context, IUnitOfWorkRepo unitOfWork, UserManager<Data.ApplicationUser> userManager)
         {
             _context = context;
             _unitOfWork = unitOfWork;
@@ -27,10 +27,7 @@ namespace Shopping.Controllers
 
         }
         
-        //public IActionResult ListItems(int id)
-        //{
-
-        //}
+        
        
         public async Task<IActionResult> CartIndex()
         {
@@ -54,14 +51,15 @@ namespace Shopping.Controllers
                 }
             }
 
-            
             return RedirectToAction("CartAddCart");
         }
+
+
+
 
         [HttpGet]
         public async Task<IActionResult> CartAddCart(int id)
         {
-
             CartViewModel cartvm = new CartViewModel();
             cartvm.CartItem.Product = _unitOfWork.Product.GetT(x => x.Id == id);
             if (cartvm != null)
@@ -73,6 +71,7 @@ namespace Shopping.Controllers
                 return NotFound();
             }
         }
+
 
         [HttpPost]
         public async Task<IActionResult> CartAddCart(CartViewModel cvm, int id, int quantity)
@@ -93,7 +92,9 @@ namespace Shopping.Controllers
                     UserId = user.Id
                 };
                 _unitOfWork.Carts.Add(cart);
+                _unitOfWork.Save();
             }
+
 
             // Check if the product already exists in the cart
             var cartItem = _unitOfWork.CartItems.GetT(x => x.ProductId == id && x.CartId == cart.Id);
@@ -109,6 +110,7 @@ namespace Shopping.Controllers
                     TotalPrice = (long)(quantity * product.Price)
                 };
                 _unitOfWork.CartItems.Add(cartItem);
+                _unitOfWork.Save();
             }
             else
             {
@@ -129,28 +131,12 @@ namespace Shopping.Controllers
             _unitOfWork.Order.Add(order);
             _unitOfWork.Save();
 
-            // Create a buy record for the order
-            BuyModel buy = new BuyModel
-            {
-                OrderId = order.Id
-            };
-            _unitOfWork.Buys.Add(buy);
-            _unitOfWork.Save();
+            TempData["CartItem_Id"] = cartItem.Id;
 
+            _unitOfWork.Save();
             return RedirectToAction(nameof(CartIndex));
         }
 
-        // Added user Details to buy product
-        //public IActionResult CartItemsWithUserDetails(CartViewModel cvm)
-        //{
-        //    if(cvm != null)
-        //    {
-        //        _unitOfWork.CartItems.Add(cvm.CartItem);
-        //        _unitOfWork.Save();
-
-        //    }
-        //    return RedirectToAction("CartIndex");
-        //}
 
 
 
@@ -184,15 +170,7 @@ namespace Shopping.Controllers
             return RedirectToAction("CartIndex");
         }
         
-        //public IActionResult Buy(int id)
-        //{
-
-        //}
-
-
-
-
-
+       
 
     }
     

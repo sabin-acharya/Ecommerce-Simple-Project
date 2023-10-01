@@ -2,7 +2,7 @@
 
 namespace Shopping.Repository.Interface
 {
-    public interface ICart : IRepository<CartModel>
+    public interface ICartRepo : IRepositoryRepo<CartModel>
     {
         void AddUpdate(CartModel cart);
     }

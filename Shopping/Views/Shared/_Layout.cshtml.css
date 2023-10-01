@@ -89,3 +89,6 @@ p {
     .header .row {
         margin-top: 70px;
     }
+.navbar {
+    border-bottom: 1px solid #ddd; /* Change the color as needed */
+}

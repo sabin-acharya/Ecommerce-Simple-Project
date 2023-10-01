@@ -4,7 +4,7 @@ using Shopping.Repository.Interface;
 
 namespace Shopping.Repository.Class
 {
-    public class OrderRepo : RepositoryRepo<OrderModel>, IOrder
+    public class OrderRepo : RepositoryRepo<OrderModel>, IOrderRepo
     {
         private readonly ApplicationDbContext _context;
         public OrderRepo(ApplicationDbContext context) : base(context)

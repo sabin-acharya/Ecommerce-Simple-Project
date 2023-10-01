@@ -1,8 +1,11 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Shopping.Data;
+using Shopping.Models;
 using Shopping.Repository.Class;
 using Shopping.Repository.Interface;
+using Shopping.Services;
+using System.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,11 +23,31 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultUI()
-    .AddDefaultTokenProviders(); // Add this line to configure default token providers for password reset, etc.
+    .AddDefaultTokenProviders(); //  to configure default token providers for password reset,email verification etc.
+
+// Register to send email
+var emailModel = builder.Configuration.GetSection("EmailModel").Get<EmailModel>();
+
+if (emailModel != null)
+{
+    // Register the EmailModel as a singleton service
+    builder.Services.AddSingleton(emailModel);
+}
+else
+{
+ 
+    // Handle the case where emailModel is null, e.g., by logging an error
+}
+//Add services
+builder.Services.AddScoped<IEmailServicesRepo, EmailServicesRepo>();
 
 builder.Services.AddControllersWithViews();
-builder.Services.AddScoped<IUnitOfWork, UnitOfWorkRepo>();
+
+// GEnericRepository 
+builder.Services.AddScoped<IUnitOfWorkRepo, UnitOfWorkRepo>();
 builder.Services.AddRazorPages();
+
+
 
 var app = builder.Build();
 
@@ -51,7 +74,7 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=HomeIndex}/{id?}");
+    pattern: "{controller=Location}/{action=LocationIndex}/{id?}");
 
 //using (var scope = app.Services.CreateScope())
 //{

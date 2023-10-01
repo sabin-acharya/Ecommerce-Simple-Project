@@ -13,9 +13,9 @@ namespace Shopping.Areas.Admin.Controllers
     public class CategoryController : Controller
     {
         private readonly ApplicationDbContext _context;
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IUnitOfWorkRepo _unitOfWork;
 
-        public CategoryController(ApplicationDbContext context, IUnitOfWork unitOfWork)
+        public CategoryController(ApplicationDbContext context, IUnitOfWorkRepo unitOfWork)
         {
             _context = context;
             _unitOfWork = unitOfWork;
