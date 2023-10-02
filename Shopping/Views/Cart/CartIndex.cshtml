@@ -1,11 +1,10 @@
 ﻿@model Shopping.ViewModel.CartViewModel
 <div class="container">
     <a asp-controller="Location" asp-action="LocationSaveOrder">
-         
-   
+
         <input type="hidden" />
         <!-- Row 2: Shopping Cart -->
-        <div class="row-3">
+        <div class="row mt-3">
             <div class="col-12">
                 <h1 class="text-center">Shopping Cart</h1>
 
@@ -17,62 +16,63 @@
                 }
                 else
                 {
-                    <table id="customers" class="table ">
-                        <thead>
-                            <tr>
-                                <th scope="col">Product</th>
-                                <th scope="col">Quantity</th>
-                                <th scope="col">Price</th>
-                                <th scope="col">Total</th>
-                                <th scope="col"></th>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            @foreach (var cartitem in Model.CartItems)
-                            {
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
                                 <tr>
+                                    <th scope="col">Product</th>
+                                    <th scope="col">Quantity</th>
+                                    <th scope="col">Price</th>
+                                    <th scope="col">Total</th>
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                @foreach (var cartitem in Model.CartItems)
+                                {
+                                    <tr>
+                                        <td>
+                                            <div class="media">
+                                                <img src="@cartitem.Product.ImageUrl" alt="Product Image" class="mr-3 product-image" />
+                                                <div class="media-body">
+                                                    <h5 class="mt-0">@cartitem.Product.Name</h5>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="quantity">
+                                            <div class="input-group">
+                                                <button class=" btn-outline-secondary quantity-decrease" >-</button>
+                                                <span class="input-group-text">@cartitem.Quantity</span>
+                                                <button class=" btn-outline-secondary quantity-increase">+</button>
+                                            </div>
+                                        </td>
+                                        <td>@cartitem.Product?.Price.ToString("C")</td>
+                                        <td>@string.Format("{0:C}", cartitem.Product?.Price * cartitem.Quantity)</td>
+
+
+
+
+                                        <td>
+                                            <a asp-controller="Cart" asp-action="CartRemove" asp-route-id="@cartitem.Id" class="btn btn-danger">
+                                                <i class="bi bi-trash-fill"></i> Remove
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+
+                            <tfoot>
+                                <tr>
+                                    <td colspan="3"><strong>Total:</strong></td>
+                                    <td>@Model.CartItems.Sum(item => item.Quantity * (item.Product?.Price ?? 0)).ToString("C")</td>
                                     <td>
-                                        <div class="d-flex align-items-center">
-                                            @if (cartitem.Product != null)
-                                            {
-                                                <img src="@cartitem.Product.ImageUrl" alt="Product Image" height="50" width="50" class="product-image mr-2" />
-                                                <span>@cartitem.Product.Name</span>
-                                                
-                                            }
-                                            else
-                                            {
-                                                <span>N/A</span>
-                                            }
-                                        </div>
-                                    </td>
-                                    <td class="quantity">
-                                        <span>@cartitem.Quantity</span>
-                                        
-                                    </td>
-                                    <td>@cartitem.Product?.Price.ToString("C")</td>
-                                    <td>@(cartitem.Quantity * (cartitem.Product?.Price ?? 0))$</td>
-                                    <td>
-                                        <a asp-controller="Cart" asp-action="CartRemove" asp-route-id="@cartitem.Id" class="btn btn-danger">
-                                            <i class="bi bi-trash-fill"></i> Remove
-                                        </a>
+                                        <button class="btn btn-primary">Place Your Location</button>
                                     </td>
                                 </tr>
-                            }
-
-
-                        </tbody>
-
-                        <tfoot>
-                            <tr>
-                                <td colspan="3"><strong>Total:</strong></td>
-                                <td>@Model.CartItems.Sum(item => item.Quantity * (item.Product?.Price ?? 0)).ToString("C")</td>
-                                <td>
-                                    <button class="btn btn-primary" >Place Your Location</button>
-                                </td>
-                            </tr>
-                        </tfoot>
-                    </table>
+                            </tfoot>
+                        </table>
+                    </div>
                 }
             </div>
         </div>
@@ -86,7 +86,7 @@
     quantityElements.forEach((element) => {
         const incrementElement = element.querySelector('.quantity-increase');
         const decrementElement = element.querySelector('.quantity-decrease');
-        const quantitySpan = element.querySelector('span');
+        const quantitySpan = element.querySelector('.input-group-text');
 
         incrementElement.addEventListener('click', () => {
             const currentQuantity = parseInt(quantitySpan.innerText);

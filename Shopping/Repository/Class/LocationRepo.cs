@@ -23,6 +23,12 @@ namespace Shopping.Repository.Class
                     buyDB.CustomerName = location.CustomerName;
                     buyDB.PhoneNumber = location.PhoneNumber;
                     buyDB.Address = location.Address;
+                    buyDB.City = location.City;
+                    buyDB.FloorNo = location.FloorNo;
+                    buyDB.State = location.State;
+                    buyDB.PinCode = location.PinCode;
+                    buyDB.StreetName = location.StreetName;
+
 
                 }
             
