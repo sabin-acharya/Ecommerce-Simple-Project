@@ -21,7 +21,7 @@
                 <!-- Slides -->
                 <div class="carousel-inner">
                     <div class="Logo">
-                    <a href="index.html"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/DishHome_Logo.svg/120px-DishHome_Logo.svg.png" alt="Store" width="125px" /></a>
+                    @* <a href="index.html"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/DishHome_Logo.svg/120px-DishHome_Logo.svg.png" alt="Store" width="125px" /></a> *@
                     </div>
                     <div class="carousel-item active">
                         <div class="row">
@@ -105,14 +105,15 @@
                     {
                         <div class="col-12 col-sm-6 col-md-4 col-lg-4">
                             <div class="product-card">
-                                <img src="@product.ImageUrl" alt="@product.Name" class="product-image" />
+                                <img src="@product.ImageUrl" alt="@product.Name" class="product-image" style="border: 2px solid #FFA500;" />
                                 <div class="product-details">
-                                    <div class="product-name">@product.Name</div>
+                                    <div class="product-name" style="font-weight: bold;">@product.Name</div>
                                     <div class="product-description">@product.Description</div>
                                     <div class="product-price">@product.Price.ToString("C")</div>
                                     <div class="product-actions">
                                         <a asp-controller="Cart" asp-action="CartAddCart" asp-route-id="@product.Id">
-                                            <button type="button" class="product-action-button  button button1">AddToCart</button>
+                                            @* <button type="button" class="product-action-button  button button1">AddToCart</button> *@
+                                            <button type="button" class="btn btn-success">AddToCart</button>
                                         </a>
                                         <div class="rating">
                                             <i class="fas fa-star"></i>
@@ -149,7 +150,7 @@
                         everything is clear as can be.
                     </small>
                     <br />
-                    <a href="#" class="btn">Buy Now →</a>
+                    <a asp-action="" asp-class="btn">Buy Now →</a>
                 </div>
             </div>
         </div>

@@ -10,6 +10,17 @@ namespace Shopping.Models
         public string? CustomerName { get; set; }
         [Required]
         
+
+        public long FloorNo {  get; set; }
+        [Required]
+        public string? StreetName { get; set; }
+        [Required]
+        public string? City { get; set; }
+        [Required]
+        public string? State { get; set; }
+        [Required]
+        public double PinCode { get; set; }
+        [Required]
         public string? Address { get; set; }
         [Required]
         

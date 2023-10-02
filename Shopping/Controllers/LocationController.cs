@@ -22,7 +22,7 @@ namespace Shopping.Controllers
             return View();
         }
 
-       
+        [HttpGet]
         public IActionResult LocationSaveOrder(int? id)
         {
             CartItemModel ci = new CartItemModel();
@@ -65,7 +65,7 @@ namespace Shopping.Controllers
 
             BuyCartIdModel buyCartIdModel = new BuyCartIdModel
             {
-                CartItemId = (int) Id,
+                CartItemId = (int)Id,
                 LocationId = lovm.Location.Id
 
             };

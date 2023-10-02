@@ -1,11 +1,11 @@
 ﻿@model Shopping.ViewModel.CartViewModel
 <div class="container">
-    <a asp-controller="Location" asp-action="LocationSaveOrder" asp-route-id="@Model.CartItem.Id">
-        <input type="hidden" asp-for="CartItem.Id " />
+    <a asp-controller="Location" asp-action="LocationSaveOrder">
+         
    
         <input type="hidden" />
         <!-- Row 2: Shopping Cart -->
-        <div class="row ">
+        <div class="row-3">
             <div class="col-12">
                 <h1 class="text-center">Shopping Cart</h1>
 
@@ -27,6 +27,7 @@
                                 <th scope="col"></th>
                             </tr>
                         </thead>
+
                         <tbody>
                             @foreach (var cartitem in Model.CartItems)
                             {
@@ -37,6 +38,7 @@
                                             {
                                                 <img src="@cartitem.Product.ImageUrl" alt="Product Image" height="50" width="50" class="product-image mr-2" />
                                                 <span>@cartitem.Product.Name</span>
+                                                
                                             }
                                             else
                                             {
@@ -57,13 +59,16 @@
                                     </td>
                                 </tr>
                             }
+
+
                         </tbody>
+
                         <tfoot>
                             <tr>
                                 <td colspan="3"><strong>Total:</strong></td>
                                 <td>@Model.CartItems.Sum(item => item.Quantity * (item.Product?.Price ?? 0)).ToString("C")</td>
                                 <td>
-                                    <button class="btn btn-primary" id="placeOrder">Place Your Location</button>
+                                    <button class="btn btn-primary" >Place Your Location</button>
                                 </td>
                             </tr>
                         </tfoot>

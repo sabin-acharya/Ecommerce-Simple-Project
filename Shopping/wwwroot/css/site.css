@@ -1,4 +1,4 @@
-html {
+/*html {
   font-size: 14px;
 }
 
@@ -19,9 +19,9 @@ body {
 
 
 .product - card:hover {
-    border: 2px solid #007BFF; /* Change the border style as desired */
-    box - shadow: 0px 0px 10px rgba(0, 123, 255, 0.5); /* Add a box shadow for the hover effect */
-}
+    border: 2px solid #007BFF;*/ /* Change the border style as desired */
+    /*box - shadow: 0px 0px 10px rgba(0, 123, 255, 0.5);*/ /* Add a box shadow for the hover effect */
+/*}
 
 span {
     display: inline - block;
@@ -29,15 +29,15 @@ span {
     height: 70px;
     margin: 6px;
     background - color: #f9f9f9;
-}
+}*/
 
 /* CSS for product image hover effect */
-.product-image:hover {
-    border: 2px solid #007BFF; /* Change the border style and color as desired */
-}
+/*.product-image:hover {
+    border: 2px solid #007BFF;*/ /* Change the border style and color as desired */
+/*}*/
 
 /* CSS to center-align product details */
-.product-card {
+/*.product-card {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -45,14 +45,14 @@ span {
 }
 
 .product-details {
-    margin-top: 10px; /* Adjust margin as needed */
-}
+    margin-top: 10px;*/ /* Adjust margin as needed */
+/*}*/
 
 
 
 /*CartItemCss*/
 
-#customers {
+/*#customers {
     font-family: Arial, Helvetica, sans-serif;
     border-collapse: collapse;
     width: 100%;
@@ -77,14 +77,14 @@ span {
         text-align: left;
         background-color: #04AA6D;
         color: white;
-    }
+    }*/
 
 
 /*HoverButton*/
 
-.button {
-    background-color: #4CAF50; /* Green */
-    border: none;
+/*.button {
+    background-color: #4CAF50;*/ /* Green */
+    /*border: none;
     color: white;
     padding: 16px 32px;
     text-align: center;
@@ -100,6 +100,6 @@ span {
     background-color: white;
     color: black;
     border: 2px solid #4CAF50;
-}
+}*/
 
 

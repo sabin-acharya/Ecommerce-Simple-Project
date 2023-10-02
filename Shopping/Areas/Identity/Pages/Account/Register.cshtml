@@ -34,12 +34,23 @@
                         </div>
                         <div class="mb-3">
                             <label for="password" class="form-label">Password</label>
-                            <input asp-for="Input.Password" id="Password" class="form-control" autocomplete="new-password" aria-required="true" />
+                            <div class="input-group">
+                                <input asp-for="Input.Password" id="Password" class="form-control" autocomplete="new-password" aria-required="true" type="password">
+                                <a class="btn btn-outline-secondary" type="button" id="togglePassword">
+                                    <i class="fa fa-eye" id="eyeIcon"></i>
+                                </a>
+                            </div>
                             <span asp-validation-for="Input.Password" class="text-danger"></span>
                         </div>
+
                         <div class="mb-3">
                             <label for="confirmPassword" class="form-label">Confirm Password</label>
-                            <input asp-for="Input.ConfirmPassword"  id="ConformPassword" class="form-control" autocomplete="new-password" aria-required="true" />
+                            <div class="input-group">
+                                <input asp-for="Input.ConfirmPassword" id="ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" type="password">
+                                <a class="btn btn-outline-secondary" type="button" id="toggleConfirmPassword">
+                                    <i class="fa fa-eye" id="confirmEyeIcon"></i>
+                                </a>
+                            </div>
                             <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
                         </div>
                         <div class="mb-3">
@@ -54,41 +65,38 @@
                 </div>
             </div>
         </div>
-       @*  <div class="col-md-6 col-md-offset-2">
-            <section>
-                <h3>Use another service to register.</h3>
-                <hr />
-                @{
-                    if ((Model.ExternalLogins?.Count ?? 0) == 0)
-                    {
-                        <div>
-                            <p>
-                                There are no external authentication services configured. See this <a href="https://go.microsoft.com/fwlink/?LinkID=532715">
-                                    article
-                                    about setting up this ASP.NET application to support logging in via external services
-                                </a>.
-                            </p>
-                        </div>
-                    }
-                    else
-                    {
-                        <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
-                            <div>
-                                <p>
-                                    @foreach (var provider in Model.ExternalLogins!)
-                                    {
-                                        <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
-                                    }
-                                </p>
-                            </div>
-                        </form>
-                    }
-                }
-            </section>
-        </div> *@
+       
     </div>
 </div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }
+<script>
+    const togglePassword = document.getElementById("togglePassword");
+    const toggleConfirmPassword = document.getElementById("toggleConfirmPassword");
+    const passwordInput = document.getElementById("Password");
+    const confirmPasswordInput = document.getElementById("ConfirmPassword");
+    const eyeIcon = document.getElementById("eyeIcon");
+    const confirmEyeIcon = document.getElementById("confirmEyeIcon");
+
+    togglePassword.addEventListener("click", function () {
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            eyeIcon.className = "fa fa-eye-slash";
+        } else {
+            passwordInput.type = "password";
+            eyeIcon.className = "fa fa-eye";
+        }
+    });
+
+    toggleConfirmPassword.addEventListener("click", function () {
+        if (confirmPasswordInput.type === "password") {
+            confirmPasswordInput.type = "text";
+            confirmEyeIcon.className = "fa fa-eye-slash";
+        } else {
+            confirmPasswordInput.type = "password";
+            confirmEyeIcon.className = "fa fa-eye";
+        }
+    });
+</script>

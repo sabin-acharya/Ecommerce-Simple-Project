@@ -1,4 +1,4 @@
-﻿/* Reset and global styles */
+﻿ Reset and global styles 
 body {
     font-family: "Poppins", sans-serif;
     margin: 0;
@@ -168,7 +168,7 @@ h4 {
     transform: translateY(-5px);
 }
 
-/* Offer */
+ Offer 
 .offer {
     background: radial-gradient(#fff, #ffd6d6);
     margin-top: 80px;
@@ -203,7 +203,7 @@ small {
             filter: grayscale(0);
         }
 
-/* footer */
+ footer 
 .footer {
     background: #000;
     color: #8a8a8a;
@@ -286,7 +286,7 @@ ul
     display: none;
 }
 
-/* media query for menu */
+ media query for menu 
 @media only screen and (max-width: 800px) {
     nav ul 
     {
@@ -319,7 +319,7 @@ ul
     }
 }
 
-/* all products page */
+ all products page 
 .row-2 
 {
     justify-content: space-between;
@@ -356,7 +356,7 @@ select {
             color: #ffffff;
         }
 
-/* single product details */
+ single product details 
 .single-product {
     margin-top: 80px;
 }
@@ -382,7 +382,8 @@ select {
     }
 
     .single-product input {
-        width: 50px .container
+        width: 50px 
+        .container
 
 {
     position: relative;
@@ -417,7 +418,7 @@ select {
 }
 
 .btn {
-    background-color: rgba(0, 0, 0, 0.5); /* Add a semi-transparent background color to the button for better readability */
+    background-color: rgba(0, 0, 0, 0.5);  Add a semi-transparent background color to the button for better readability 
     color: white;
     text-decoration: none;
     padding: 10px 20px;

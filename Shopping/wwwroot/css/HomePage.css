@@ -1,4 +1,4 @@
-﻿.carousel-control-prev,
+﻿/*.carousel-control-prev,
 .carousel-control-next {
     position: absolute;
     top: 0;
@@ -14,15 +14,15 @@
 
 .carousel-control-next {
     right: 0;
-}
+}*/
 
 /* Custom styling for the control button icons */
-.carousel-control-prev-icon,
+/*.carousel-control-prev-icon,
 .carousel-control-next-icon {
     font-size: 3rem;
-}
+}*/
 
 /* Hide the visually-hidden text for screen readers */
-.visually-hidden {
+/*.visually-hidden {
     display: none;
-}
+}*/
