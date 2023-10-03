@@ -36,9 +36,7 @@
                             <label for="password" class="form-label">Password</label>
                             <div class="input-group">
                                 <input asp-for="Input.Password" id="Password" class="form-control" autocomplete="new-password" aria-required="true" type="password">
-                                <a class="btn btn-outline-secondary" type="button" id="togglePassword">
-                                    <i class="fa fa-eye" id="eyeIcon"></i>
-                                </a>
+                                
                             </div>
                             <span asp-validation-for="Input.Password" class="text-danger"></span>
                         </div>
@@ -47,9 +45,7 @@
                             <label for="confirmPassword" class="form-label">Confirm Password</label>
                             <div class="input-group">
                                 <input asp-for="Input.ConfirmPassword" id="ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" type="password">
-                                <a class="btn btn-outline-secondary" type="button" id="toggleConfirmPassword">
-                                    <i class="fa fa-eye" id="confirmEyeIcon"></i>
-                                </a>
+                                
                             </div>
                             <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
                         </div>

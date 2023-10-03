@@ -3,22 +3,61 @@
     ViewData["Title"] = "BuySaveOrder";
 }
 
+<style>
+    /* Add styles for parallax effect */
+    .parallax-container {
+        position: relative;
+        height: 600px; /* Adjust the height as needed */
+        overflow: hidden;
+    }
+
+    .parallax-image {
+        width: 100%;
+        height: auto;
+        position: absolute;
+        top: 0;
+        left: 0;
+        transform: translateZ(0);
+        z-index: -1;
+    }
+
+    .parallax-content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        color: #fff; /* Adjust text color */
+    }
+
+        .parallax-content a.btn {
+            background-color: rgba(0, 123, 255, 0.7); /* Adjust the alpha (transparency) value */
+            border: 2px solid #007BFF; /* Add a border with the desired color */
+            color: #fff; /* Text color */
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+    /* Style for the advertisement banner */
+    /*.advertisement-banner {
+        background-image: url('your-advertisement-image.jpg');
+        background-size: cover;
+        height: 300px; 
+    }*/
+</style>
+
 <div class="container p-3">
-    <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
-       @*  <ol class="carousel-indicators">
-            <li data-bs-target="#myCarousel" data-bs-slide-to="0" class="active"></li>
-            <li data-bs-target="#myCarousel" data-bs-slide-to="1"></li>
-            <li data-bs-target="#myCarousel" data-bs-slide-to="2"></li>
-        </ol> *@
+    <div class="parallax-container">
+        <img class="parallax-image" src="https://dmnwebapi.dishhome.com.np/v1/file/media-16852521709168882.jpeg" alt="Image 2">
 
-        <div>
-            
-            <div>
-                <img src="https://dmnwebapi.dishhome.com.np/v1/file/media-16852521709168882.jpeg" alt="Image 2" style="width: 100%;">
-               
-            <a asp-action="HomeIndex" asp-controller="Home"  class="btn">Explore Now →</a>
+        <div class="parallax-content">
+            <a asp-action="HomeIndex" asp-controller="Home" class="btn btn-transparent">Explore Now →</a>
         </div>
-
-            @* target="_blank" *@
     </div>
 </div>
+
+<!-- Advertisement banner section -->
+@*<div class="advertisement-banner">
+    <!-- You can add any content or links related to the advertisement here -->
+</div>*@

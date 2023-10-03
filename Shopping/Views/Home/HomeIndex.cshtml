@@ -93,10 +93,11 @@
     <section class="featured-products">
         <div class="container">
             <h2 class="section-title" align="center">Featured Products</h2>
-            <div class="search-bar">
-                <input type="text" maxlength="80" id="searchBox" placeholder="Search by name or category..." class="form-control search-input col-12 col-sm-6 col-md-4" />
-                <button id="searchButton" class="search-button col-12 col-sm-3 col-md-2">Search</button>
-            </div>
+            <form class="search">
+                <input type="text" id="searchBox" placeholder="Search by name or category..." class="search-input" />
+                <button id="searchButton" type="button" class="searchbutton"><i class="ri-search-2-line"></i></button>
+            </form>
+
             <div class="product-list">
                 <!-- Add this product-list wrapper -->
                 <div class="row">

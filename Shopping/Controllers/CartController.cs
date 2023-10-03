@@ -122,14 +122,14 @@ namespace Shopping.Controllers
             _unitOfWork.Save();
 
             // Create an order for the cart item
-            OrderModel order = new OrderModel
-            {
-                CartItemsId = cartItem.Id,
-                UserId = user.Id
-            };
+            //OrderModel order = new OrderModel
+            //{
+            //    CartItemsId = cartItem.Id,
+            //    UserId = user.Id
+            //};
 
-            _unitOfWork.Order.Add(order);
-            _unitOfWork.Save();
+            //_unitOfWork.Order.Add(order);
+            //_unitOfWork.Save();
 
             TempData["CartItem_Id"] = cartItem.Id;
 
