@@ -56,6 +56,11 @@
                     <input name="file" type="file" class="form-control" onchange="displaySelectedImage(this);" />
                 </div>
 
+                <div class="mb-3">
+                    <label asp-for="Product.NewImage" class="form-label">Upload NewImage</label>
+                    <input name="file" type="file" class="form-control" onchange="displaySelectedImage(this);" />
+                </div>
+
                 <div class="text-center">
                     @if ((Model.Product == null || Model.Product.Id == 0))
                     {

@@ -25,6 +25,7 @@ namespace Shopping.Repository.Class
                 productDB.Price = product.Price;
                 productDB.ImageUrl = product.ImageUrl;
                 productDB.CategoryId = product.CategoryId;
+                productDB.NewImage = product.NewImage;
             }
         }
     }

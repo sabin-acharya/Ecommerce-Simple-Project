@@ -13,6 +13,8 @@ namespace Shopping.Models
         public string? ImageUrl { get; set; }
         
         public double Price { get; set; }
+
+        public string NewImage {  get; set; }
         public int CategoryId { get; set; }
         [ValidateNever]
         public CategoryModel? Category { get; set; }

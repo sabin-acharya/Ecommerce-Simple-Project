@@ -34,7 +34,7 @@
                                     Success isn't always about greatness. It's about consistency.
                                     Consistent <br />hard work gains success. Greatness will come.
                                 </p>
-                                <a href="#" target="_blank" rel="noopener noreferrer" class="btn">Explore Now →</a>
+                               @*  <a href="#" target="_blank" rel="noopener noreferrer" class="btn">Explore Now →</a> *@
                             </div>
                             <div class="col-6">
                                 <img src="https://dmnwebapi.dishhome.com.np/v1/file/media-16586521467964155.png" alt="" />
@@ -94,9 +94,9 @@
         <div class="container">
             <h2 class="section-title" align="center">Featured Products</h2>
             <form class="search">
-                <input type="text" id="searchBox" placeholder="Search by name or category..." class="search-input" />
-                <button id="searchButton" type="button" class="searchbutton"><i class="ri-search-2-line"></i></button>
+                <input type="text" id="searchBox" placeholder="Search by name or category..." class="search-input">
             </form>
+
 
             <div class="product-list">
                 <!-- Add this product-list wrapper -->
@@ -151,7 +151,7 @@
                         everything is clear as can be.
                     </small>
                     <br />
-                    <a asp-action="" asp-class="btn">Buy Now →</a>
+                    <a asp-action="CartAddCart" asp-controller="Cart" asp-class="btn">Buy Now →</a>
                 </div>
             </div>
         </div>
@@ -256,21 +256,16 @@
         </div>
     </section>
 
-    <!-- Footer Section -->
+   
     
 </body>
 </html>
 
 <script>
-    // Get references to the search box, search button, and product list
+    // Get references to the search box and product list
     const searchBox = document.getElementById('searchBox');
-    const searchButton = document.getElementById('searchButton');
     const productList = document.querySelector('.product-list');
-
-    // Add a click event listener to the search button
-    searchButton.addEventListener('click', function () {
-        performSearch();
-    });
+    const productCards = productList.querySelectorAll('.product-card');
 
     // Add an input event listener to the search box for instant search
     searchBox.addEventListener('input', function () {
@@ -279,10 +274,7 @@
 
     // Function to perform the search
     function performSearch() {
-        // Get the search query from the input box
         const query = searchBox.value.toLowerCase();
-        // Get all product cards
-        const productCards = productList.querySelectorAll('.product-card');
 
         // Loop through the product cards and show/hide based on the query
         productCards.forEach(productCard => {

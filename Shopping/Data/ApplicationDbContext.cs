@@ -25,6 +25,8 @@ namespace Shopping.Data
 
         public DbSet<BuyCartIdModel> BuyCartIdModels { get; set; }
 
+        public DbSet<ReviewModel> Reviews { get; set; }
+
         
         protected override void OnModelCreating(ModelBuilder Builder)
         {

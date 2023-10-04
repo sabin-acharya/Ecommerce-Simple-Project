@@ -91,6 +91,7 @@ namespace Shopping.Controllers
                         file.CopyTo(fileStream);
                     }
                     vm.Product.ImageUrl = @"\ProductImage\" + fileName;
+                    vm.Product.NewImage = @"\ProductImage\" + fileName;
                 }
                 if(vm.Product.Id ==  0)
                 {
